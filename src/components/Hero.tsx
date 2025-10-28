@@ -44,10 +44,10 @@ const Hero = () => {
               { icon: Shield, title: "Reliable", desc: "99.9% uptime guarantee" },
               { icon: Wifi, title: "No Data Caps", desc: "Unlimited data usage" }
             ].map((feature, idx) => (
-              <div key={idx} className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all">
-                <feature.icon className="w-10 h-10 mb-3 mx-auto" />
-                <h3 className="font-semibold text-lg mb-1">{feature.title}</h3>
-                <p className="text-white/80 text-sm">{feature.desc}</p>
+              <div key={idx} className="bg-white/90 backdrop-blur-md rounded-2xl p-6 border border-white/30 hover:bg-white transition-all shadow-lg">
+                <feature.icon className="w-10 h-10 mb-3 mx-auto text-primary" />
+                <h3 className="font-semibold text-lg mb-1 text-foreground">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm">{feature.desc}</p>
               </div>
             ))}
           </div>
