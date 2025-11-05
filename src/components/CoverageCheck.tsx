@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { MapPin, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+
+// Replace with your Google Places API key
+const GOOGLE_PLACES_API_KEY = "YOUR_GOOGLE_PLACES_API_KEY";
 
 const CoverageCheck = () => {
-  const [zipCode, setZipCode] = useState("");
+  const [address, setAddress] = useState<any>(null);
   const [isChecking, setIsChecking] = useState(false);
 
   const handleCheck = () => {
-    if (!zipCode || zipCode.length < 5) {
-      toast.error("Please enter a valid ZIP code");
+    if (!address || !address.value) {
+      toast.error("Please select a valid Australian address");
       return;
     }
 
@@ -20,7 +23,7 @@ const CoverageCheck = () => {
     setTimeout(() => {
       setIsChecking(false);
       toast.success("Great news! Service is available in your area", {
-        description: "Our fastest speeds are ready for you",
+        description: `Coverage confirmed for ${address.label}`,
         icon: <CheckCircle2 className="w-5 h-5" />
       });
     }, 1500);
@@ -39,20 +42,61 @@ const CoverageCheck = () => {
             Check Coverage in Your Area
           </h2>
           <p className="text-xl text-muted-foreground">
-            Enter your ZIP code to see if our high-speed internet is available at your location
+            Enter your full address to see if our high-speed internet is available at your location
           </p>
         </div>
 
         <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-8 md:p-12 border border-primary/10">
           <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
-            <Input
-              type="text"
-              placeholder="Enter ZIP code"
-              value={zipCode}
-              onChange={(e) => setZipCode(e.target.value.replace(/\D/g, "").slice(0, 5))}
-              className="text-lg h-14 rounded-xl"
-              maxLength={5}
-            />
+            <div className="flex-1">
+              <GooglePlacesAutocomplete
+                apiKey={GOOGLE_PLACES_API_KEY}
+                selectProps={{
+                  value: address,
+                  onChange: setAddress,
+                  placeholder: "Enter your full address",
+                  styles: {
+                    control: (provided) => ({
+                      ...provided,
+                      height: '56px',
+                      borderRadius: '0.75rem',
+                      fontSize: '1.125rem',
+                      border: '1px solid hsl(var(--input))',
+                      backgroundColor: 'hsl(var(--background))',
+                      color: 'hsl(var(--foreground))',
+                    }),
+                    input: (provided) => ({
+                      ...provided,
+                      color: 'hsl(var(--foreground))',
+                    }),
+                    placeholder: (provided) => ({
+                      ...provided,
+                      color: 'hsl(var(--muted-foreground))',
+                    }),
+                    singleValue: (provided) => ({
+                      ...provided,
+                      color: 'hsl(var(--foreground))',
+                    }),
+                    menu: (provided) => ({
+                      ...provided,
+                      backgroundColor: 'hsl(var(--background))',
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '0.75rem',
+                    }),
+                    option: (provided, state) => ({
+                      ...provided,
+                      backgroundColor: state.isFocused ? 'hsl(var(--accent))' : 'hsl(var(--background))',
+                      color: 'hsl(var(--foreground))',
+                      cursor: 'pointer',
+                    }),
+                  },
+                }}
+                autocompletionRequest={{
+                  componentRestrictions: { country: 'au' },
+                  types: ['address']
+                }}
+              />
+            </div>
             <Button 
               size="lg" 
               className="h-14 px-8 whitespace-nowrap rounded-xl shadow-lg hover:shadow-xl transition-all"
