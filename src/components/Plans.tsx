@@ -38,7 +38,7 @@ const plans = [
       "Adult sites & gambling blocked",
       "Best for gaming & CCTV streaming",
       "Connect up to 15 devices",
-      "GI NET router included ($199 value)",
+      "GI NET router $199",
       "Free onsite installation & training",
       "Priority customer support"
     ],
