@@ -23,7 +23,8 @@ const plans = [
       "Best for gaming & CCTV streaming",
       "Connect up to 15 devices",
       "Priority customer support",
-      "Free Wi-Fi router included",
+      "BYO Wi-Fi router or WiFi 6 router $199",
+      "Onsite installation included",
       "No contracts required"
     ],
     popular: true
@@ -36,7 +37,8 @@ const plans = [
       "Perfect for gaming & 4K CCTV streaming",
       "Unlimited devices",
       "Premium 24/7 support",
-      "Advanced Wi-Fi 6 router",
+      "BYO Wi-Fi router or WiFi 6 router $199",
+      "Onsite installation included",
       "Free security suite included"
     ],
     popular: false
