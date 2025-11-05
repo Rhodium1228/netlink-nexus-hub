@@ -18,7 +18,7 @@ const plans = [
   {
     name: "Pro",
     speed: "500 Mbps",
-    price: "89",
+    price: "95",
     features: [
       "Best for gaming & CCTV streaming",
       "Connect up to 15 devices",
@@ -28,6 +28,21 @@ const plans = [
       "No contracts required"
     ],
     popular: true
+  },
+  {
+    name: "Halal",
+    speed: "500 Mbps",
+    price: "95",
+    features: [
+      "Family-friendly internet",
+      "Adult sites & gambling blocked",
+      "Best for gaming & CCTV streaming",
+      "Connect up to 15 devices",
+      "GI NET router included ($199 value)",
+      "Free onsite installation & training",
+      "Priority customer support"
+    ],
+    popular: false
   },
   {
     name: "Ultra",
@@ -58,7 +73,7 @@ const Plans = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {plans.map((plan, idx) => (
             <Card 
               key={idx} 
