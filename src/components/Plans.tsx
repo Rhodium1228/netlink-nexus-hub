@@ -6,7 +6,7 @@ const plans = [
   {
     name: "Basic",
     speed: "100 Mbps",
-    price: "39.99",
+    price: "69",
     features: [
       "Perfect for browsing & streaming",
       "Connect up to 5 devices",
@@ -18,9 +18,9 @@ const plans = [
   {
     name: "Pro",
     speed: "500 Mbps",
-    price: "59.99",
+    price: "89",
     features: [
-      "Ideal for families & gaming",
+      "Best for gaming & CCTV streaming",
       "Connect up to 15 devices",
       "Priority customer support",
       "Free Wi-Fi router included",
@@ -31,9 +31,9 @@ const plans = [
   {
     name: "Ultra",
     speed: "1 Gbps",
-    price: "89.99",
+    price: "119",
     features: [
-      "Maximum speed for power users",
+      "Perfect for gaming & 4K CCTV streaming",
       "Unlimited devices",
       "Premium 24/7 support",
       "Advanced Wi-Fi 6 router",

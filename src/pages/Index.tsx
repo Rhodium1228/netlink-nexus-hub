@@ -11,10 +11,10 @@ const Index = () => {
       <Navbar />
       <main className="pt-20">
         <Hero />
-        <Features />
         <div id="plans">
           <Plans />
         </div>
+        <Features />
         <div id="coverage">
           <CoverageCheck />
         </div>
