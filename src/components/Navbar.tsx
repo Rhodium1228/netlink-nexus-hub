@@ -1,13 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X, Wifi } from "lucide-react";
 import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleHashNavigation = (hash: string) => {
+    if (location.pathname === "/") {
+      // Already on home page, just scroll
+      const element = document.querySelector(hash);
+      element?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Navigate to home page with hash
+      navigate(`/${hash}`);
+      // Wait for navigation and then scroll
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        element?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+    setIsOpen(false);
+  };
 
   const navLinks = [
-    { name: "Plans", href: "/#plans" },
-    { name: "Coverage", href: "/#coverage" },
+    { name: "Plans", hash: "#plans" },
+    { name: "Coverage", hash: "#coverage" },
     { name: "Support", href: "/support" },
     { name: "About", href: "/about" }
   ];
@@ -29,13 +49,23 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
-              >
-                {link.name}
-              </a>
+              link.hash ? (
+                <button
+                  key={link.name}
+                  onClick={() => handleHashNavigation(link.hash)}
+                  className="text-foreground hover:text-primary transition-colors font-medium"
+                >
+                  {link.name}
+                </button>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-foreground hover:text-primary transition-colors font-medium"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
 
@@ -59,14 +89,24 @@ const Navbar = () => {
           <div className="md:hidden py-6 border-t border-border">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-foreground hover:text-primary transition-colors font-medium py-2"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </a>
+                link.hash ? (
+                  <button
+                    key={link.name}
+                    onClick={() => handleHashNavigation(link.hash)}
+                    className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="text-foreground hover:text-primary transition-colors font-medium py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
               <Button variant="ghost" className="w-full justify-start">Sign In</Button>
               <Button className="w-full">Get Started</Button>
