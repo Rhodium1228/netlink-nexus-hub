@@ -25,6 +25,19 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
+  const handleLogoClick = () => {
+    if (location.pathname === "/") {
+      // Already on home, scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // Navigate to home and scroll to top
+      navigate("/");
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
+    }
+  };
+
   const navLinks = [
     { name: "Plans", hash: "#plans" },
     { name: "Coverage", hash: "#coverage" },
@@ -37,14 +50,14 @@ const Navbar = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <button onClick={handleLogoClick} className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Wifi className="w-6 h-6 text-white" />
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               GiNet
             </span>
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
