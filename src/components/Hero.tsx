@@ -21,7 +21,7 @@ const Hero = () => {
             Internet at the
             <br />
             <span className="bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-              Speed of Life
+              Speed of Light
             </span>
           </h1>
           
