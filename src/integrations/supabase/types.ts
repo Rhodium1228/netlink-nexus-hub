@@ -14,7 +14,170 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      orders: {
+        Row: {
+          created_at: string | null
+          id: string
+          installation_address: string | null
+          installation_date: string | null
+          installation_time: string | null
+          plan_id: string | null
+          router_price: number | null
+          router_purchase: boolean | null
+          status: Database["public"]["Enums"]["order_status"] | null
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          total_amount: number
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          installation_address?: string | null
+          installation_date?: string | null
+          installation_time?: string | null
+          plan_id?: string | null
+          router_price?: number | null
+          router_purchase?: boolean | null
+          status?: Database["public"]["Enums"]["order_status"] | null
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          total_amount: number
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          installation_address?: string | null
+          installation_date?: string | null
+          installation_time?: string | null
+          plan_id?: string | null
+          router_price?: number | null
+          router_purchase?: boolean | null
+          status?: Database["public"]["Enums"]["order_status"] | null
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          total_amount?: number
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plans: {
+        Row: {
+          active: boolean | null
+          created_at: string | null
+          features: Json | null
+          id: string
+          name: string
+          popular: boolean | null
+          price: number
+          speed: string
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string | null
+          features?: Json | null
+          id?: string
+          name: string
+          popular?: boolean | null
+          price: number
+          speed: string
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
+          features?: Json | null
+          id?: string
+          name?: string
+          popular?: boolean | null
+          price?: number
+          speed?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          address: string | null
+          city: string | null
+          created_at: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          postcode: string | null
+          state: string | null
+          suburb: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          address?: string | null
+          city?: string | null
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          postcode?: string | null
+          state?: string | null
+          suburb?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          address?: string | null
+          city?: string | null
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          postcode?: string | null
+          state?: string | null
+          suburb?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      service_areas: {
+        Row: {
+          available: boolean | null
+          city: string
+          created_at: string | null
+          id: string
+          postcode: string
+          state: string
+          suburb: string
+        }
+        Insert: {
+          available?: boolean | null
+          city: string
+          created_at?: string | null
+          id?: string
+          postcode: string
+          state: string
+          suburb: string
+        }
+        Update: {
+          available?: boolean | null
+          city?: string
+          created_at?: string | null
+          id?: string
+          postcode?: string
+          state?: string
+          suburb?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +186,13 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      order_status:
+        | "pending"
+        | "payment_received"
+        | "scheduled"
+        | "installed"
+        | "active"
+        | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +319,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      order_status: [
+        "pending",
+        "payment_received",
+        "scheduled",
+        "installed",
+        "active",
+        "cancelled",
+      ],
+    },
   },
 } as const
