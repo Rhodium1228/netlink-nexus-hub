@@ -4,12 +4,17 @@ import { MapPin, CheckCircle2, XCircle } from "lucide-react";
 import { toast } from "sonner";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { supabase } from "@/integrations/supabase/client";
+import { useGoogleMapsScript } from "@/hooks/useGoogleMapsScript";
 
 const GOOGLE_PLACES_API_KEY = import.meta.env.VITE_GOOGLE_PLACES_API_KEY || "";
 
 const CoverageCheck = () => {
   const [address, setAddress] = useState<any>(null);
   const [isChecking, setIsChecking] = useState(false);
+  const { isLoaded, error } = useGoogleMapsScript({ 
+    apiKey: GOOGLE_PLACES_API_KEY,
+    libraries: ['places'] 
+  });
 
   const handleCheck = async () => {
     if (!address || !address.value) {
@@ -89,9 +94,22 @@ const CoverageCheck = () => {
         </div>
 
         <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-8 md:p-12 border border-primary/10">
+          {error && (
+            <div className="mb-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+              Unable to load address autocomplete. Please check your API key configuration.
+            </div>
+          )}
+          
+          {!isLoaded && !error && (
+            <div className="mb-4 p-4 bg-muted rounded-lg text-sm text-muted-foreground text-center">
+              Loading address search...
+            </div>
+          )}
+
           <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
             <div className="flex-1">
-              <GooglePlacesAutocomplete
+              {isLoaded && !error ? (
+                <GooglePlacesAutocomplete
                 apiKey={GOOGLE_PLACES_API_KEY}
                 selectProps={{
                   value: address,
@@ -138,6 +156,14 @@ const CoverageCheck = () => {
                   types: ['address']
                 }}
               />
+              ) : (
+                <input
+                  type="text"
+                  placeholder={error ? "Address search unavailable" : "Loading..."}
+                  disabled
+                  className="w-full h-14 px-4 rounded-xl border border-input bg-background text-foreground"
+                />
+              )}
             </div>
             <Button 
               size="lg" 
