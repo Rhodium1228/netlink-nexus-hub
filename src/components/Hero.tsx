@@ -30,10 +30,24 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button size="lg" variant="secondary" className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all">
+            <Button 
+              size="lg" 
+              variant="secondary" 
+              className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all"
+              onClick={() => {
+                document.getElementById('coverage')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               Check Availability
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-6 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-8 py-6 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20"
+              onClick={() => {
+                document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               View Plans
             </Button>
           </div>

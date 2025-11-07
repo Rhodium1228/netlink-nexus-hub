@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const plans = [
   {
@@ -61,6 +62,12 @@ const plans = [
 ];
 
 const Plans = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = (planName: string) => {
+    navigate(`/signup?plan=${encodeURIComponent(planName)}`);
+  };
+
   return (
     <section className="py-20 px-6 bg-background">
       <div className="container mx-auto">
@@ -115,6 +122,7 @@ const Plans = () => {
                 className="w-full" 
                 variant={plan.popular ? "default" : "outline"}
                 size="lg"
+                onClick={() => handleGetStarted(plan.name)}
               >
                 Get Started
               </Button>

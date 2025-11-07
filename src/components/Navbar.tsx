@@ -1,12 +1,28 @@
-import { Button } from "@/components/ui/button";
-import { Menu, X, Wifi } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Menu, X, Wifi, User } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    // Check current session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user || null);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handleHashNavigation = (hash: string) => {
     if (location.pathname === "/") {
@@ -84,8 +100,35 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost">Sign In</Button>
-            <Button>Get Started</Button>
+            {user ? (
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={async () => {
+                  await supabase.auth.signOut();
+                  navigate("/");
+                }}
+              >
+                <User className="w-4 h-4 mr-2" />
+                Sign Out
+              </Button>
+            ) : (
+              <>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => navigate("/auth")}
+                >
+                  Sign In
+                </Button>
+                <Button 
+                  size="sm"
+                  onClick={() => navigate("/auth")}
+                >
+                  Get Started
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -121,8 +164,44 @@ const Navbar = () => {
                   </Link>
                 )
               ))}
-              <Button variant="ghost" className="w-full justify-start">Sign In</Button>
-              <Button className="w-full">Get Started</Button>
+              <div className="flex flex-col gap-3 pt-4 border-t border-border">
+                {user ? (
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start"
+                    onClick={async () => {
+                      await supabase.auth.signOut();
+                      setIsOpen(false);
+                      navigate("/");
+                    }}
+                  >
+                    <User className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </Button>
+                ) : (
+                  <>
+                    <Button 
+                      variant="ghost" 
+                      className="w-full justify-start"
+                      onClick={() => {
+                        navigate("/auth");
+                        setIsOpen(false);
+                      }}
+                    >
+                      Sign In
+                    </Button>
+                    <Button 
+                      className="w-full"
+                      onClick={() => {
+                        navigate("/auth");
+                        setIsOpen(false);
+                      }}
+                    >
+                      Get Started
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         )}

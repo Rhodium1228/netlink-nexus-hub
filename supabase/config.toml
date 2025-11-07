@@ -1,1 +1,4 @@
 project_id = "brfvokludiulsugljrhq"
+
+[functions.check-coverage]
+verify_jwt = false
