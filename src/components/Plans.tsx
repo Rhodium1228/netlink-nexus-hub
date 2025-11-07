@@ -130,9 +130,11 @@ const Plans = () => {
           ))}
         </div>
 
-        <p className="text-center text-muted-foreground mt-12 text-sm">
-          All plans include unlimited data and no annual contracts
-        </p>
+        <div className="mt-12 max-w-5xl mx-auto bg-muted/30 border border-border rounded-2xl p-8">
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            <strong className="text-foreground">Compliance Notice:</strong> Speeds are maximum NBN wholesale tiers. Typical evening speeds (7–11pm): Basic 80–100 Mbps, Pro/Halal 400–500 Mbps, Ultra 800–950 Mbps. Actual speeds vary by location, wiring, and congestion. Check your address at nbnco.com.au. Unlimited data. No lock-in contracts. Full terms at /terms. Privacy policy at /privacy.
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -8,16 +8,16 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 25% 97%;
-    --foreground: 220 40% 10%;
+    --background: 216 28% 97%;
+    --foreground: 210 100% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 40% 10%;
+    --card-foreground: 210 100% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 40% 10%;
+    --popover-foreground: 210 100% 15%;
 
-    --primary: 215 100% 45%;
+    --primary: 210 100% 20%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 195 100% 50%;
