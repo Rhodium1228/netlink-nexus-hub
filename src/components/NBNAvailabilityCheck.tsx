@@ -101,7 +101,7 @@ const NBNAvailabilityCheck = () => {
       </div>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-[90vw] md:max-w-[80vw] h-[90vh] md:h-[80vh] p-0 gap-0">
+        <DialogContent className="max-w-[100vw] h-[100vh] md:max-w-[80vw] md:h-[80vh] p-0 gap-0 flex flex-col">
           <DialogHeader className="p-6 pb-4 border-b">
             <div className="flex items-start justify-between">
               <div className="flex-1">
@@ -122,13 +122,25 @@ const NBNAvailabilityCheck = () => {
             </div>
           </DialogHeader>
           
-          <div className="flex-1 overflow-hidden">
-            <iframe
-              src="https://www.nbnco.com.au/connect-home-or-business/check-your-address"
-              className="w-full h-full border-0"
-              title="NBN Co Address Checker"
-              loading="lazy"
-            />
+          <div className="flex-1 overflow-auto flex flex-col items-center justify-center p-8 bg-gradient-to-br from-primary/5 to-accent/5">
+            <div className="max-w-md text-center space-y-6">
+              <p className="text-muted-foreground mb-6">
+                The official NBN checker can't be embedded due to security settings, so it opens in a new tab.
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="bg-[#003366] hover:bg-[#003366]/90 text-white px-8 h-14 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
+              >
+                <a 
+                  href="https://www.nbnco.com.au/connect-home-or-business/check-your-address"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open NBN Availability Checker
+                </a>
+              </Button>
+            </div>
           </div>
 
           <div className="p-4 bg-muted/50 border-t text-center">
