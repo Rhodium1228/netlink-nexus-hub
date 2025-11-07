@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { MapPin, CheckCircle2, XCircle } from "lucide-react";
 import { toast } from "sonner";
@@ -11,9 +11,11 @@ const GOOGLE_PLACES_API_KEY = import.meta.env.VITE_GOOGLE_PLACES_API_KEY || "";
 const CoverageCheck = () => {
   const [address, setAddress] = useState<any>(null);
   const [isChecking, setIsChecking] = useState(false);
+  
+  const libraries = useMemo(() => ['places'], []);
   const { isLoaded, error } = useGoogleMapsScript({ 
     apiKey: GOOGLE_PLACES_API_KEY,
-    libraries: ['places'] 
+    libraries
   });
 
   const handleCheck = async () => {

@@ -52,7 +52,7 @@ export const useGoogleMapsScript = ({ apiKey, libraries = ['places'] }: UseGoogl
         script.parentNode.removeChild(script);
       }
     };
-  }, [apiKey, libraries]);
+  }, [apiKey, libraries.join(',')]);
 
   return { isLoaded, error };
 };
