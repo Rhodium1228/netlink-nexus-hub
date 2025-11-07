@@ -43,6 +43,7 @@ All colors MUST be HSL.
     --cyber-cyan: 195 100% 50%;
     --deep-navy: 220 45% 20%;
     --light-sky: 210 100% 96%;
+    --nbn-blue: 210 100% 20%;
     
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(215 100% 45%), hsl(195 100% 50%));

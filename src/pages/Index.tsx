@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Plans from "@/components/Plans";
 import CoverageCheck from "@/components/CoverageCheck";
+import NBNAvailabilityCheck from "@/components/NBNAvailabilityCheck";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -11,6 +12,7 @@ const Index = () => {
       <Navbar />
       <main className="pt-20">
         <Hero />
+        <NBNAvailabilityCheck />
         <div id="plans">
           <Plans />
         </div>
