@@ -7,27 +7,23 @@ import CoverageCheck from "@/components/CoverageCheck";
 import NBNAvailabilityCheck from "@/components/NBNAvailabilityCheck";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navbar />
       <main className="pt-20">
         <Hero />
-        <NBNAvailabilityCheck />
+        
         <div id="plans">
           <Plans />
         </div>
         <BusinessPlans />
         <Features />
         <div id="coverage">
-          <CoverageCheck />
+          
         </div>
       </main>
       <Footer />
       <CookieConsent />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;

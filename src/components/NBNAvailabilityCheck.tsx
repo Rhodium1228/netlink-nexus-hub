@@ -5,25 +5,19 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 import { toast } from "sonner";
-
 const NBNAvailabilityCheck = () => {
   const [postcode, setPostcode] = useState("");
   const [address, setAddress] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!postcode || postcode.length !== 4 || !/^\d{4}$/.test(postcode)) {
       toast.error("Please enter a valid 4-digit postcode");
       return;
     }
-
     setIsModalOpen(true);
   };
-
-  return (
-    <section className="py-20 px-4">
+  return <section className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -34,70 +28,7 @@ const NBNAvailabilityCheck = () => {
           </p>
         </div>
 
-        <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-8 md:p-12 border border-primary/10">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label htmlFor="postcode" className="text-base font-semibold">
-                  Postcode <span className="text-destructive">*</span>
-                </Label>
-                <Input
-                  id="postcode"
-                  type="text"
-                  placeholder="e.g., 2000"
-                  value={postcode}
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/\D/g, "").slice(0, 4);
-                    setPostcode(value);
-                  }}
-                  maxLength={4}
-                  required
-                  className="h-12 text-base"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="address" className="text-base font-semibold">
-                  Address <span className="text-muted-foreground text-sm">(Optional)</span>
-                </Label>
-                <Input
-                  id="address"
-                  type="text"
-                  placeholder="e.g., 1 Example Street, Sydney"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  className="h-12 text-base"
-                />
-              </div>
-            </div>
-
-            <div className="flex justify-center pt-4">
-              <Button
-                type="submit"
-                size="lg"
-                className="bg-nbn-blue hover:bg-nbn-blue/90 text-white px-12 h-14 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
-              >
-                Check Now
-              </Button>
-            </div>
-          </form>
-
-          <div className="mt-8 pt-6 border-t border-border/50">
-            <p className="text-xs text-muted-foreground italic leading-relaxed">
-              *Powered by NBN Co. Availability shown is indicative; GiNet confirms final eligibility during signup. 
-              Complies with ACMA transparency rules. See{" "}
-              <a 
-                href="https://www.nbnco.com.au" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                nbnco.com.au
-              </a>
-              {" "}for full terms.
-            </p>
-          </div>
-        </div>
+        
       </div>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -111,12 +42,7 @@ const NBNAvailabilityCheck = () => {
                   This is the official NBN tool – results help us tailor your GiNet plan.
                 </DialogDescription>
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsModalOpen(false)}
-                className="h-8 w-8 rounded-full"
-              >
+              <Button variant="ghost" size="icon" onClick={() => setIsModalOpen(false)} className="h-8 w-8 rounded-full">
                 <X className="h-5 w-5" />
               </Button>
             </div>
@@ -127,16 +53,8 @@ const NBNAvailabilityCheck = () => {
               <p className="text-muted-foreground mb-6">
                 The official NBN checker can't be embedded due to security settings, so it opens in a new tab.
               </p>
-              <Button
-                asChild
-                size="lg"
-                className="bg-[#003366] hover:bg-[#003366]/90 text-white px-8 h-14 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
-              >
-                <a 
-                  href="https://www.nbnco.com.au/connect-home-or-business/check-your-address"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+              <Button asChild size="lg" className="bg-[#003366] hover:bg-[#003366]/90 text-white px-8 h-14 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all">
+                <a href="https://www.nbnco.com.au/connect-home-or-business/check-your-address" target="_blank" rel="noopener noreferrer">
                   Open NBN Availability Checker
                 </a>
               </Button>
@@ -146,22 +64,18 @@ const NBNAvailabilityCheck = () => {
           <div className="p-4 bg-muted/50 border-t text-center">
             <p className="text-sm text-foreground">
               FTTP ready?{" "}
-              <Button
-                variant="link"
-                className="p-0 h-auto text-primary font-semibold"
-                onClick={() => {
-                  setIsModalOpen(false);
-                  document.getElementById("plans")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
+              <Button variant="link" className="p-0 h-auto text-primary font-semibold" onClick={() => {
+              setIsModalOpen(false);
+              document.getElementById("plans")?.scrollIntoView({
+                behavior: "smooth"
+              });
+            }}>
                 View Ultra plan for 1 Gbps
               </Button>
             </p>
           </div>
         </DialogContent>
       </Dialog>
-    </section>
-  );
+    </section>;
 };
-
 export default NBNAvailabilityCheck;
