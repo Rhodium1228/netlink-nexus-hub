@@ -26,13 +26,18 @@ const Footer = () => {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                 <Wifi className="w-6 h-6 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <span className="text-2xl font-bold text-primary">
                 GiNet
               </span>
             </div>
-            <p className="text-muted-foreground mb-6 max-w-sm">
+            <p className="text-muted-foreground mb-4 max-w-sm">
               Connecting communities with lightning-fast fiber-optic internet. Experience the future of connectivity today.
             </p>
+            <div className="text-sm space-y-1 mb-6">
+              <p className="text-muted-foreground"><strong className="text-foreground">ABN:</strong> 12 345 678 901</p>
+              <p className="text-muted-foreground"><strong className="text-foreground">Email:</strong> support@ginet.au</p>
+              <p className="text-muted-foreground"><strong className="text-foreground">Phone:</strong> 1300 GI NET</p>
+            </div>
             <div className="flex gap-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, idx) => (
                 <a
@@ -66,15 +71,21 @@ const Footer = () => {
           ))}
         </div>
 
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-sm">
+        <div className="pt-8 border-t border-border">
+          <div className="flex flex-wrap justify-center gap-3 mb-4 text-sm text-muted-foreground">
+            <a href="/privacy" className="hover:text-primary transition-colors">Privacy</a>
+            <span>•</span>
+            <a href="/terms" className="hover:text-primary transition-colors">Terms</a>
+            <span>•</span>
+            <a href="/business-terms" className="hover:text-primary transition-colors">Business Terms</a>
+            <span>•</span>
+            <a href="/halal-policy" className="hover:text-primary transition-colors">Halal Policy</a>
+            <span>•</span>
+            <a href="/cookies" className="hover:text-primary transition-colors">Cookies</a>
+          </div>
+          <p className="text-center text-muted-foreground text-sm">
             © 2024 GiNet. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-primary transition-colors">Cookie Policy</a>
-          </div>
         </div>
       </div>
     </footer>
