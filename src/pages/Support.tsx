@@ -87,8 +87,8 @@ const Support = () => {
                   <CardDescription>Call us anytime</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <a href="tel:0387878779" className="text-lg font-semibold text-primary hover:underline">
-                    03 8787 8779
+                  <a href="tel:0387973795" className="text-lg font-semibold text-primary hover:underline">
+                    03 8797 3795
                   </a>
                   <p className="text-sm text-muted-foreground mt-2">
                     Available 24/7
@@ -105,8 +105,8 @@ const Support = () => {
                   <CardDescription>Send us a message</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <a href="mailto:support@rhodiumit.com.au" className="text-lg font-semibold text-primary hover:underline break-all">
-                    support@rhodiumit.com.au
+                  <a href="mailto:support@ginet.au" className="text-lg font-semibold text-primary hover:underline break-all">
+                    support@ginet.au
                   </a>
                   <p className="text-sm text-muted-foreground mt-2">
                     Response within 24 hours

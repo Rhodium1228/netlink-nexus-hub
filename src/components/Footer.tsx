@@ -1,4 +1,5 @@
 import { Wifi, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { CANONICAL } from "@/config/canonical";
 
 const Footer = () => {
   const footerSections = [
@@ -34,9 +35,9 @@ const Footer = () => {
               Connecting communities with lightning-fast fiber-optic internet. Experience the future of connectivity today.
             </p>
             <div className="text-sm space-y-1 mb-6">
-              <p className="text-muted-foreground"><strong className="text-foreground">ABN:</strong> 12 345 678 901</p>
-              <p className="text-muted-foreground"><strong className="text-foreground">Email:</strong> support@ginet.au</p>
-              <p className="text-muted-foreground"><strong className="text-foreground">Phone:</strong> 1300 GI NET</p>
+              <p className="text-muted-foreground"><strong className="text-foreground">ABN:</strong> {CANONICAL.company.abn.formatted}</p>
+              <p className="text-muted-foreground"><strong className="text-foreground">Email:</strong> {CANONICAL.contact.email.support}</p>
+              <p className="text-muted-foreground"><strong className="text-foreground">Phone:</strong> {CANONICAL.contact.phone.display}</p>
             </div>
             <div className="flex gap-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, idx) => (
@@ -84,7 +85,7 @@ const Footer = () => {
             <a href="/aup" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Acceptable Use Policy</a>
           </div>
           <p className="text-center text-muted-foreground text-sm">
-            © 2025 GiNet. All rights reserved.
+            © 2025 {CANONICAL.company.name}. All rights reserved.
           </p>
         </div>
       </div>
