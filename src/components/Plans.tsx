@@ -48,7 +48,7 @@ const plans = [
   {
     name: "Ultra",
     speed: "1 Gbps",
-    price: "119",
+    price: "129",
     features: [
       "Perfect for gaming & 4K CCTV streaming",
       "Unlimited devices",
