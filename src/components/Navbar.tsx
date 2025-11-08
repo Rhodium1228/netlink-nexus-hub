@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Wifi, User } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,12 +67,10 @@ const Navbar = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <button onClick={handleLogoClick} className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <Wifi className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              GiNet
+          <button onClick={handleLogoClick} className="flex items-center gap-3">
+            <img src={logo} alt="GI NET Logo" className="w-12 h-12 object-contain" />
+            <span className="text-2xl font-bold text-foreground">
+              GI NET
             </span>
           </button>
 
