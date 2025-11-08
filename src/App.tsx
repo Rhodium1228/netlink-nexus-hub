@@ -10,6 +10,7 @@ import Auth from "./pages/Auth";
 import Signup from "./pages/Signup";
 import Privacy from "./pages/Privacy";
 import ConsumerAdvice from "./pages/ConsumerAdvice";
+import AUP from "./pages/AUP";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/signup" element={<Signup />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/consumer-advice" element={<ConsumerAdvice />} />
+          <Route path="/aup" element={<AUP />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -80,6 +80,8 @@ const Footer = () => {
             <a href="/business-terms" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Business Terms</a>
             <span className="text-muted-foreground">|</span>
             <a href="/halal-policy" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Halal Policy</a>
+            <span className="text-muted-foreground">|</span>
+            <a href="/aup" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Acceptable Use Policy</a>
           </div>
           <p className="text-center text-muted-foreground text-sm">
             © 2025 GiNet. All rights reserved.
