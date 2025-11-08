@@ -193,7 +193,7 @@ const BusinessQuoteModal = ({ isOpen, onClose, preselectedPlan }: BusinessQuoteM
                     <SelectContent>
                       <SelectItem value="Business Basic">Business Basic</SelectItem>
                       <SelectItem value="Business Pro">Business Pro</SelectItem>
-                      <SelectItem value="Business Halal">Business Halal</SelectItem>
+                      <SelectItem value="Business Smart">Business Smart</SelectItem>
                       <SelectItem value="Business Ultra">Business Ultra</SelectItem>
                     </SelectContent>
                   </Select>

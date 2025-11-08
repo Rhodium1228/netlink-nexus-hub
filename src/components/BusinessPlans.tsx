@@ -35,7 +35,7 @@ const businessPlans = [
     ]
   },
   {
-    name: "Business Halal",
+    name: "Business Smart",
     speed: "500 Mbps",
     price: "115",
     features: [
