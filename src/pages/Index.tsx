@@ -6,6 +6,7 @@ import BusinessPlans from "@/components/BusinessPlans";
 import CoverageCheck from "@/components/CoverageCheck";
 import NBNAvailabilityCheck from "@/components/NBNAvailabilityCheck";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
         </div>
       </main>
       <Footer />
+      <CookieConsent />
     </div>
   );
 };

@@ -72,19 +72,17 @@ const Footer = () => {
         </div>
 
         <div className="pt-8 border-t border-border">
-          <div className="flex flex-wrap justify-center gap-3 mb-4 text-sm text-muted-foreground">
-            <a href="/privacy" className="hover:text-primary transition-colors">Privacy</a>
-            <span>•</span>
-            <a href="/terms" className="hover:text-primary transition-colors">Terms</a>
-            <span>•</span>
-            <a href="/business-terms" className="hover:text-primary transition-colors">Business Terms</a>
-            <span>•</span>
-            <a href="/halal-policy" className="hover:text-primary transition-colors">Halal Policy</a>
-            <span>•</span>
-            <a href="/cookies" className="hover:text-primary transition-colors">Cookies</a>
+          <div className="flex flex-wrap justify-center gap-3 mb-4" style={{ fontSize: '14px' }}>
+            <a href="/privacy" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Privacy Policy</a>
+            <span className="text-muted-foreground">|</span>
+            <a href="/terms" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Terms of Service</a>
+            <span className="text-muted-foreground">|</span>
+            <a href="/business-terms" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Business Terms</a>
+            <span className="text-muted-foreground">|</span>
+            <a href="/halal-policy" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Halal Policy</a>
           </div>
           <p className="text-center text-muted-foreground text-sm">
-            © 2024 GiNet. All rights reserved.
+            © 2025 GiNet. All rights reserved.
           </p>
         </div>
       </div>
