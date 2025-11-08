@@ -12,6 +12,7 @@ import Privacy from "./pages/Privacy";
 import ConsumerAdvice from "./pages/ConsumerAdvice";
 import AUP from "./pages/AUP";
 import AccessibilityAndDisability from "./pages/AccessibilityAndDisability";
+import CriticalInformationSummaries from "./pages/CriticalInformationSummaries";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/aup" element={<AUP />} />
           <Route path="/accessibility-and-disability" element={<AccessibilityAndDisability />} />
           <Route path="/accessibility" element={<AccessibilityAndDisability />} />
+          <Route path="/critical-information-summaries" element={<CriticalInformationSummaries />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
