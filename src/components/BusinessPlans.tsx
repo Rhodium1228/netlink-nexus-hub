@@ -13,7 +13,7 @@ const businessPlans = [
       "Perfect for small offices & browsing",
       "Connect up to 5 devices",
       "Static IP included",
-      "GI NET Cyber Guard (firewall $69/mo optional + DDoS $15/mo optional)",
+      "GI NET Cyber Guard (firewall $69/mo optional + DDoS $15/mo optional) available for all businesses",
       "Dedicated business installation & SLA",
       "99.95% uptime",
       "Priority Australian support"
