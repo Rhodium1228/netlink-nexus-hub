@@ -3,7 +3,7 @@ import HeroModern from "@/components/HeroModern";
 import AddressCheckerModern from "@/components/AddressCheckerModern";
 import PlanCarousel from "@/components/PlanCarousel";
 import WhyGINet from "@/components/WhyGINet";
-import SecurityVLAN from "@/components/SecurityVLAN";
+import InteractiveVLANDiagram from "@/components/InteractiveVLANDiagram";
 import ProfessionalInstallation from "@/components/ProfessionalInstallation";
 import Testimonials from "@/components/Testimonials";
 import BusinessPlans from "@/components/BusinessPlans";
@@ -20,7 +20,7 @@ const Index = () => {
         <AddressCheckerModern />
         <PlanCarousel />
         <WhyGINet />
-        <SecurityVLAN />
+        <InteractiveVLANDiagram />
         <ProfessionalInstallation />
         <Testimonials />
         <BusinessPlans />
