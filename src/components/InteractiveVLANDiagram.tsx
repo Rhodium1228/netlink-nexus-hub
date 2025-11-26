@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Shield, Smartphone, Laptop, Camera, Tv, Speaker, Users, Wifi, Lock, AlertTriangle } from "lucide-react";
+import vlanSectionBg from "@/assets/vlan-section-bg.jpg";
 
 type VLANZone = "personal" | "iot" | "guest" | null;
 
@@ -46,8 +47,18 @@ const InteractiveVLANDiagram = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-background via-muted/30 to-background">
-      <div className="container mx-auto px-6">
+    <section className="py-20 relative overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0">
+        <img 
+          src={vlanSectionBg} 
+          alt="Network topology background" 
+          className="w-full h-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-muted/40 to-background/95"></div>
+      </div>
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             Enterprise-Grade Home Security
@@ -59,7 +70,7 @@ const InteractiveVLANDiagram = () => {
 
         {/* Main Diagram */}
         <div className="max-w-7xl mx-auto mb-16">
-          <div className="relative min-h-[600px]">
+          <div className="relative min-h-[700px] lg:min-h-[800px]">
             {/* Central Router */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
               <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${
@@ -80,8 +91,8 @@ const InteractiveVLANDiagram = () => {
                     <line
                       x1="50%"
                       y1="50%"
-                      x2="20%"
-                      y2="25%"
+                      x2="25%"
+                      y2="20%"
                       stroke="hsl(var(--primary))"
                       strokeWidth="3"
                       strokeDasharray="8,4"
@@ -93,8 +104,8 @@ const InteractiveVLANDiagram = () => {
                     <line
                       x1="50%"
                       y1="50%"
-                      x2="80%"
-                      y2="25%"
+                      x2="75%"
+                      y2="20%"
                       stroke="hsl(var(--accent))"
                       strokeWidth="3"
                       strokeDasharray="8,4"
@@ -107,7 +118,7 @@ const InteractiveVLANDiagram = () => {
                       x1="50%"
                       y1="50%"
                       x2="50%"
-                      y2="85%"
+                      y2="88%"
                       stroke="hsl(var(--secondary))"
                       strokeWidth="3"
                       strokeDasharray="8,4"
@@ -120,7 +131,7 @@ const InteractiveVLANDiagram = () => {
 
             {/* Personal Zone - Top Left */}
             <div
-              className="absolute top-0 left-0 w-80"
+              className="absolute top-4 left-4 lg:left-8 w-72 lg:w-80"
               onMouseEnter={() => setHoveredZone("personal")}
               onMouseLeave={() => setHoveredZone(null)}
             >
@@ -159,7 +170,7 @@ const InteractiveVLANDiagram = () => {
 
             {/* IoT Zone - Top Right */}
             <div
-              className="absolute top-0 right-0 w-80"
+              className="absolute top-4 right-4 lg:right-8 w-72 lg:w-80"
               onMouseEnter={() => setHoveredZone("iot")}
               onMouseLeave={() => setHoveredZone(null)}
             >
@@ -198,7 +209,7 @@ const InteractiveVLANDiagram = () => {
 
             {/* Guest Zone - Bottom Center */}
             <div
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-80"
+              className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-72 lg:w-80"
               onMouseEnter={() => setHoveredZone("guest")}
               onMouseLeave={() => setHoveredZone(null)}
             >
