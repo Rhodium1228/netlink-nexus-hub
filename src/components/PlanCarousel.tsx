@@ -3,6 +3,9 @@ import { Card } from "@/components/ui/card";
 import { Check, Zap, Shield, Wifi, Users, Headphones, Router } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useNavigate } from "react-router-dom";
+import planBasicBg from "@/assets/plan-basic-bg.jpg";
+import planProBg from "@/assets/plan-pro-bg.jpg";
+import planUltraBg from "@/assets/plan-ultra-bg.jpg";
 
 const plans = [
   {
@@ -11,6 +14,7 @@ const plans = [
     price: "$75",
     period: "month — No Contract",
     subtitle: "Great for streaming, browsing, work from home, and general use.",
+    backgroundImage: planBasicBg,
     features: [
       {
         icon: Wifi,
@@ -46,6 +50,7 @@ const plans = [
     price: "$95",
     period: "month — No Contract",
     subtitle: "Perfect for gaming, CCTV streaming, 4K video, and homes with many devices.",
+    backgroundImage: planProBg,
     features: [
       {
         icon: Shield,
@@ -91,6 +96,7 @@ const plans = [
     price: "$135",
     period: "month — No Contract",
     subtitle: "Built for tech-heavy homes, content creators, offices, and multi-level properties.",
+    backgroundImage: planUltraBg,
     features: [
       {
         icon: Zap,
@@ -152,12 +158,24 @@ const PlanCarousel = () => {
             {plans.map((plan, index) => (
               <CarouselItem key={index}>
                 <Card 
-                  className={`p-8 hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] bg-card border-2 ${
+                  className={`relative overflow-hidden p-8 hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] border-2 ${
                     plan.popular ? 'border-primary shadow-xl' : 'border-border'
                   }`}
                 >
+                  {/* Animated Background Image */}
+                  <div className="absolute inset-0 opacity-20">
+                    <img 
+                      src={plan.backgroundImage} 
+                      alt={`${plan.name} plan background`}
+                      className="w-full h-full object-cover animate-slow-pan"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/80 to-background/90"></div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
                   {plan.popular && (
-                    <div className="bg-gradient-to-r from-primary to-accent text-white text-sm font-bold px-4 py-2 rounded-full inline-block mb-4">
+                    <div className="bg-gradient-to-r from-primary to-accent text-white text-sm font-bold px-4 py-2 rounded-full inline-block mb-4 shadow-lg">
                       🏆 MOST POPULAR
                     </div>
                   )}
@@ -209,6 +227,7 @@ const PlanCarousel = () => {
                     >
                       Check Address
                     </Button>
+                  </div>
                   </div>
                 </Card>
               </CarouselItem>
