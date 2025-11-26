@@ -92,7 +92,17 @@ const Signup = () => {
 
   useEffect(() => {
     const plan = searchParams.get("plan") || "Basic";
+    const success = searchParams.get("success");
     setSelectedPlan(plan);
+
+    // Handle successful payment return from Stripe
+    if (success === "true") {
+      toast.success("Payment Successful!", {
+        description: `Your ${plan} subscription is now active. Check your email for confirmation.`
+      });
+      // Clean up URL
+      window.history.replaceState({}, '', '/signup?plan=' + plan);
+    }
 
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
@@ -160,16 +170,14 @@ const Signup = () => {
     return total;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const handleCheckout = async () => {
     if (!user) {
       toast.error("Please sign in to continue");
       navigate("/auth");
       return;
     }
 
-    // Validate form
+    // Validate form first
     try {
       signupSchema.parse(formData);
       setFormErrors({});
@@ -182,7 +190,7 @@ const Signup = () => {
           }
         });
         setFormErrors(errors);
-        toast.error("Please fix the form errors");
+        toast.error("Please complete all required fields");
         return;
       }
     }
@@ -190,7 +198,7 @@ const Signup = () => {
     setSubmitting(true);
 
     try {
-      // Update user profile
+      // Update user profile with form data
       const { error: profileError } = await supabase
         .from("profiles")
         .update({
@@ -206,7 +214,7 @@ const Signup = () => {
 
       if (profileError) throw profileError;
 
-      // Get plan ID
+      // Get plan ID for order creation
       const { data: plans } = await supabase
         .from("plans")
         .select("id")
@@ -215,10 +223,11 @@ const Signup = () => {
 
       if (!plans) {
         toast.error("Selected plan not found");
+        setSubmitting(false);
         return;
       }
 
-      // Create order
+      // Create order record
       const orderData = {
         user_id: user.id,
         plan_id: plans.id,
@@ -231,31 +240,45 @@ const Signup = () => {
         status: "pending" as const
       };
 
-      const { data: order, error: orderError } = await supabase
+      const { error: orderError } = await supabase
         .from("orders")
-        .insert(orderData)
-        .select()
-        .single();
+        .insert(orderData);
 
       if (orderError) throw orderError;
 
-      toast.success("Order created successfully!", {
-        description: `Your ${selectedPlan} plan order has been placed. We'll contact you soon!`
-      });
+      // Create Stripe checkout session
+      const { data: checkoutData, error: checkoutError } = await supabase.functions.invoke(
+        "create-checkout",
+        {
+          body: { planName: selectedPlan }
+        }
+      );
 
-      // Redirect to a success page or home
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
+      if (checkoutError) throw checkoutError;
+      
+      if (checkoutData?.url) {
+        // Redirect to Stripe checkout
+        window.open(checkoutData.url, "_blank");
+        toast.success("Redirecting to secure checkout...", {
+          description: "Complete your payment to activate your subscription"
+        });
+      } else {
+        throw new Error("Failed to create checkout session");
+      }
 
     } catch (error: any) {
-      console.error("Order submission error:", error);
-      toast.error("Failed to submit order", {
+      console.error("Checkout error:", error);
+      toast.error("Failed to start checkout", {
         description: error.message || "Please try again"
       });
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    handleCheckout();
   };
 
   if (loading) {
@@ -628,12 +651,11 @@ const Signup = () => {
                 </Card>
 
                 <Button type="submit" size="lg" className="w-full" disabled={submitting}>
-                  {submitting ? "Processing..." : `Complete Order - $${calculateTotal()}`}
+                  {submitting ? "Processing..." : "Proceed to Secure Payment"}
                 </Button>
 
                 <p className="text-xs text-center text-muted-foreground">
-                  By submitting this order, you agree to our Terms of Service and Privacy Policy. 
-                  No payment required today - we'll contact you to arrange payment and confirm installation.
+                  You'll be redirected to Stripe for secure payment processing. Your subscription will activate immediately after payment.
                 </p>
               </form>
             </div>
