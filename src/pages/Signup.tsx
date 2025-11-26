@@ -246,11 +246,15 @@ const Signup = () => {
 
       if (orderError) throw orderError;
 
-      // Create Stripe checkout session
+      // Create Stripe checkout session with one-time costs
       const { data: checkoutData, error: checkoutError } = await supabase.functions.invoke(
         "create-checkout",
         {
-          body: { planName: selectedPlan }
+          body: { 
+            planName: selectedPlan,
+            purchaseRouter,
+            installationOption
+          }
         }
       );
 

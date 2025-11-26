@@ -31,11 +31,13 @@ serve(async (req) => {
     const user = data.user;
     if (!user?.email) throw new Error("User not authenticated or email not available");
 
-    const { planName } = await req.json();
+    const { planName, purchaseRouter, installationOption } = await req.json();
     
     if (!planName || !PLAN_PRICES[planName]) {
       throw new Error("Invalid plan name");
     }
+    
+    console.log("Checkout request:", { planName, purchaseRouter, installationOption });
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { 
       apiVersion: "2025-08-27.basil" 
@@ -48,16 +50,57 @@ serve(async (req) => {
       customerId = customers.data[0].id;
     }
 
+    // Build line items array
+    const lineItems: any[] = [
+      {
+        price: PLAN_PRICES[planName],
+        quantity: 1,
+      }
+    ];
+
+    // Add one-time costs for 36-month commitment option
+    if (installationOption === "free-36month") {
+      // Free modem and installation included - no additional line items
+      console.log("36-month plan selected - free modem and installation included");
+    } else {
+      // Add modem purchase as one-time cost if selected
+      if (purchaseRouter) {
+        lineItems.push({
+          price_data: {
+            currency: "aud",
+            product_data: {
+              name: "GI NET Enterprise Modem",
+              description: "WiFi 6 modem with VLAN support and advanced features"
+            },
+            unit_amount: 19900, // $199 in cents
+          },
+          quantity: 1,
+        });
+        console.log("Added modem to checkout");
+      }
+
+      // Add installation fee if paid option selected
+      if (installationOption === "paid") {
+        lineItems.push({
+          price_data: {
+            currency: "aud",
+            product_data: {
+              name: "Professional On-Site Installation",
+              description: "Technician setup with VLAN configuration and WiFi optimization"
+            },
+            unit_amount: 9900, // $99 in cents
+          },
+          quantity: 1,
+        });
+        console.log("Added installation to checkout");
+      }
+    }
+
     // Create checkout session
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
-      line_items: [
-        {
-          price: PLAN_PRICES[planName],
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems,
       mode: "subscription",
       success_url: `${req.headers.get("origin")}/signup?success=true&plan=${encodeURIComponent(planName)}`,
       cancel_url: `${req.headers.get("origin")}/signup?plan=${encodeURIComponent(planName)}`,
