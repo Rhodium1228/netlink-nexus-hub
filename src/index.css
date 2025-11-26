@@ -2,109 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* GI NET Premium Design System - All colors MUST be HSL */
 
 @layer base {
   :root {
-    --background: 216 28% 97%;
-    --foreground: 210 100% 15%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 210 100% 15%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 100% 15%;
-
-    --primary: 210 100% 20%;
+    /* GI NET Premium Color Palette */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    
+    --primary: 217 81% 53%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 195 100% 50%;
-    --secondary-foreground: 220 40% 10%;
-
-    --muted: 220 15% 90%;
-    --muted-foreground: 220 20% 45%;
-
-    --accent: 45 80% 55%;
-    --accent-foreground: 210 100% 15%;
-
-    --destructive: 0 84.2% 60.2%;
+    
+    --secondary: 215 16% 47%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 81% 53%;
+    
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 215 100% 45%;
-
-    --radius: 0.75rem;
     
-    /* ISP Brand Colors */
-    --tech-blue: 215 100% 45%;
-    --cyber-cyan: 195 100% 50%;
-    --deep-navy: 220 45% 20%;
-    --light-sky: 210 100% 96%;
-    --nbn-blue: 210 100% 20%;
+    --radius: 1rem;
     
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(215 100% 45%), hsl(195 100% 50%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.9), hsl(220 25% 97%));
+    /* Premium gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217, 81%, 53%) 0%, hsl(217, 91%, 60%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(217, 81%, 53%) 50%, hsl(217, 91%, 60%) 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
     
-    /* Effects */
-    --glow-primary: 0 8px 32px hsl(215 100% 45% / 0.3);
-    --glow-accent: 0 8px 32px hsl(195 100% 50% / 0.25);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
+    /* Shadows */
+    --shadow-premium: 0 20px 60px -15px rgba(37, 99, 235, 0.3);
+    --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+    --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.4);
+    
+    /* Sidebar */
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 220 45% 8%;
-    --foreground: 220 15% 95%;
-
-    --card: 220 40% 12%;
-    --card-foreground: 220 15% 95%;
-
-    --popover: 220 40% 12%;
-    --popover-foreground: 220 15% 95%;
-
-    --primary: 195 100% 50%;
-    --primary-foreground: 220 45% 8%;
-
-    --secondary: 220 35% 18%;
-    --secondary-foreground: 220 15% 95%;
-
-    --muted: 220 35% 18%;
-    --muted-foreground: 220 15% 65%;
-
-    --accent: 45 80% 55%;
-    --accent-foreground: 220 45% 8%;
-
-    --destructive: 0 62.8% 50.6%;
+    --background: 222 47% 11%;
+    --foreground: 0 0% 100%;
+    
+    --primary: 217 81% 53%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 215 16% 47%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 217 19% 27%;
+    --muted-foreground: 215 20% 65%;
+    
+    --card: 222 47% 15%;
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 222 47% 15%;
+    --popover-foreground: 0 0% 100%;
+    
+    --border: 217 19% 27%;
+    --input: 217 19% 27%;
+    --ring: 217 91% 60%;
+    
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-
-    --border: 220 35% 22%;
-    --input: 220 35% 22%;
-    --ring: 195 100% 50%;
     
-    --gradient-hero: linear-gradient(135deg, hsl(220 45% 15%), hsl(195 100% 25%));
-    --gradient-card: linear-gradient(145deg, hsl(220 40% 12%), hsl(220 45% 10%));
+    /* Dark mode gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(217, 81%, 53%) 50%, hsl(217, 91%, 60%) 100%);
     
-    --glow-primary: 0 8px 32px hsl(195 100% 50% / 0.4);
-    --glow-accent: 0 8px 32px hsl(215 100% 45% / 0.3);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -120,8 +105,31 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  .shadow-premium {
+    box-shadow: var(--shadow-premium);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .glass-effect {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 }
