@@ -1,4 +1,5 @@
 import { Check, Wrench } from "lucide-react";
+import technicianInstallation from "@/assets/technician-installation.jpg";
 
 const installationSteps = [
   "Full WiFi optimisation",
@@ -40,14 +41,19 @@ const ProfessionalInstallation = () => {
             </div>
           </div>
 
-          {/* Right: Image placeholder */}
+          {/* Right: Technician Image */}
           <div className="relative">
-            <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/20 via-accent/20 to-primary/20 flex items-center justify-center border-2 border-primary/20 shadow-2xl">
-              <div className="text-center p-8">
-                <Wrench className="w-24 h-24 text-primary mx-auto mb-4" />
-                <p className="text-xl font-semibold text-foreground">Professional Technician</p>
-                <p className="text-muted-foreground">Setting up your network</p>
-              </div>
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
+              <img 
+                src={technicianInstallation} 
+                alt="Professional technician installing GI NET service" 
+                className="w-full h-full object-cover aspect-square transform group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div className="absolute -bottom-6 -right-6 bg-secondary text-primary-foreground rounded-2xl p-6 shadow-xl z-10 border-4 border-background">
+              <p className="text-sm font-semibold">Certified Technicians</p>
+              <p className="text-3xl font-bold">100% Local</p>
             </div>
           </div>
         </div>
