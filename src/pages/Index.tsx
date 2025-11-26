@@ -1,29 +1,31 @@
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Features from "@/components/Features";
-import Plans from "@/components/Plans";
-import BusinessPlans from "@/components/BusinessPlans";
-import CoverageCheck from "@/components/CoverageCheck";
-import NBNAvailabilityCheck from "@/components/NBNAvailabilityCheck";
-import Footer from "@/components/Footer";
+import HeroModern from "@/components/HeroModern";
+import AddressChecker from "@/components/AddressChecker";
+import PlansCarousel from "@/components/PlansCarousel";
+import WhyGINet from "@/components/WhyGINet";
+import SecuritySection from "@/components/SecuritySection";
+import InstallationSection from "@/components/InstallationSection";
+import ReviewsSection from "@/components/ReviewsSection";
+import FooterModern from "@/components/FooterModern";
 import CookieConsent from "@/components/CookieConsent";
+
 const Index = () => {
-  return <div className="min-h-screen">
+  return (
+    <div className="min-h-screen">
       <Navbar />
       <main className="pt-20">
-        <Hero />
-        
-        <div id="plans">
-          <Plans />
-        </div>
-        <BusinessPlans />
-        <Features />
-        <div id="coverage">
-          
-        </div>
+        <HeroModern />
+        <AddressChecker />
+        <PlansCarousel />
+        <WhyGINet />
+        <SecuritySection />
+        <InstallationSection />
+        <ReviewsSection />
       </main>
-      <Footer />
+      <FooterModern />
       <CookieConsent />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
