@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import ManageSubscriptionButton from "@/components/ManageSubscriptionButton";
 import logo from "@/assets/logo.png";
 
 const Navbar = () => {
@@ -100,17 +101,20 @@ const Navbar = () => {
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
             {user ? (
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={async () => {
-                  await supabase.auth.signOut();
-                  navigate("/");
-                }}
-              >
-                <User className="w-4 h-4 mr-2" />
-                Sign Out
-              </Button>
+              <>
+                <ManageSubscriptionButton variant="ghost" size="sm" />
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={async () => {
+                    await supabase.auth.signOut();
+                    navigate("/");
+                  }}
+                >
+                  <User className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              </>
             ) : (
               <>
                 <Button 
@@ -165,18 +169,24 @@ const Navbar = () => {
               ))}
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
                 {user ? (
-                  <Button 
-                    variant="ghost" 
-                    className="w-full justify-start"
-                    onClick={async () => {
-                      await supabase.auth.signOut();
-                      setIsOpen(false);
-                      navigate("/");
-                    }}
-                  >
-                    <User className="w-4 h-4 mr-2" />
-                    Sign Out
-                  </Button>
+                  <>
+                    <ManageSubscriptionButton 
+                      variant="outline" 
+                      className="w-full justify-start"
+                    />
+                    <Button 
+                      variant="ghost" 
+                      className="w-full justify-start"
+                      onClick={async () => {
+                        await supabase.auth.signOut();
+                        setIsOpen(false);
+                        navigate("/");
+                      }}
+                    >
+                      <User className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </>
                 ) : (
                   <>
                     <Button 
