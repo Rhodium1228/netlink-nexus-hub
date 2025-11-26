@@ -3,13 +3,17 @@ import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "luc
 import { CANONICAL } from "@/config/canonical";
 
 const FooterModern = () => {
+  // Debug log to check CANONICAL structure
+  console.log("CANONICAL:", CANONICAL);
+  console.log("CANONICAL.address:", CANONICAL?.address);
+  
   return (
     <footer className="bg-foreground text-background py-16 px-6">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Company Info */}
           <div className="lg:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">{CANONICAL.company.name}</h3>
+            <h3 className="text-2xl font-bold mb-4">{CANONICAL?.company?.name || "GI NET Pty Ltd"}</h3>
             <p className="text-background/80 mb-6 leading-relaxed">
               Melbourne's smarter, safer internet provider. Professional installation, 
               enterprise-grade security, and no lock-in contracts.
@@ -17,20 +21,20 @@ const FooterModern = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-primary" />
-                <a href={`tel:${CANONICAL.contact.phone.normalized}`} className="text-background/90 hover:text-primary transition-colors">
-                  {CANONICAL.contact.phone.display}
+                <a href={`tel:${CANONICAL?.contact?.phone?.normalized}`} className="text-background/90 hover:text-primary transition-colors">
+                  {CANONICAL?.contact?.phone?.display || "03 8797 3795"}
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-primary" />
-                <a href={`mailto:${CANONICAL.contact.email.support}`} className="text-background/90 hover:text-primary transition-colors">
-                  {CANONICAL.contact.email.support}
+                <a href={`mailto:${CANONICAL?.contact?.email?.support}`} className="text-background/90 hover:text-primary transition-colors">
+                  {CANONICAL?.contact?.email?.support || "support@ginet.au"}
                 </a>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-primary mt-1" />
                 <span className="text-background/90">
-                  {CANONICAL.address.formatted}
+                  {CANONICAL?.address?.formatted || "12 Stelvio Close, Lynbrook VIC 3975, Australia"}
                 </span>
               </div>
             </div>
@@ -72,8 +76,8 @@ const FooterModern = () => {
         <div className="pt-8 border-t border-background/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-background/70 text-sm">
-              © {new Date().getFullYear()} {CANONICAL.company.name}. 
-              ABN {CANONICAL.company.abn.formatted}. All rights reserved.
+              © {new Date().getFullYear()} {CANONICAL?.company?.name || "GI NET Pty Ltd"}. 
+              ABN {CANONICAL?.company?.abn?.formatted || "71 608 672 608"}. All rights reserved.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-background/10 hover:bg-primary flex items-center justify-center transition-colors">
