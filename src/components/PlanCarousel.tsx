@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import planBasicBg from "@/assets/plan-basic-bg.jpg";
 import planProBg from "@/assets/plan-pro-bg.jpg";
 import planUltraBg from "@/assets/plan-ultra-bg.jpg";
+import animatedBg from "@/assets/plan-background-animated.mp4";
 
 const plans = [
   {
@@ -149,8 +150,22 @@ const PlanCarousel = () => {
   };
 
   return (
-    <section id="plans" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-6">
+    <section id="plans" className="py-20 relative overflow-hidden">
+      {/* Animated Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-15"
+      >
+        <source src={animatedBg} type="video/mp4" />
+      </video>
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-muted/90" />
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             Choose Your Perfect Plan
