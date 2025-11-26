@@ -179,14 +179,14 @@ const PlansCarousel = () => {
               {plans.map((plan, idx) => (
                 <CarouselItem key={idx}>
                   <Card 
-                    className={`relative p-10 rounded-3xl transition-all hover:scale-[1.02] ${
+                    className={`relative p-10 rounded-3xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 ${
                       plan.popular 
-                        ? 'border-2 border-primary shadow-premium' 
-                        : 'border border-border shadow-card'
+                        ? 'border-2 border-primary shadow-elevated hover:shadow-glow-intense gradient-card' 
+                        : 'border border-border shadow-card hover:shadow-elevated gradient-card'
                     }`}
                   >
                     {plan.popular && (
-                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 gradient-primary text-white px-8 py-2 rounded-full text-sm font-bold shadow-premium">
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 gradient-primary text-white px-8 py-2 rounded-full text-sm font-bold shadow-glow-intense animate-pulse-glow">
                         MOST POPULAR
                       </div>
                     )}
@@ -206,8 +206,8 @@ const PlansCarousel = () => {
 
                     <div className="space-y-4 mb-8">
                       {plan.features.map((feature, featureIdx) => (
-                        <div key={featureIdx} className="flex items-start gap-3 group">
-                          <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary/20 transition-colors">
+                        <div key={featureIdx} className="flex items-start gap-3 group hover:translate-x-1 transition-transform duration-200">
+                          <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-200">
                             <Check className="w-4 h-4 text-primary" strokeWidth={3} />
                           </div>
                           <div className="flex-1">
@@ -222,14 +222,14 @@ const PlansCarousel = () => {
 
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Button 
-                        className="flex-1 h-12 text-base font-semibold shadow-premium" 
+                        className="flex-1 h-12 text-base font-semibold shadow-elevated hover:shadow-glow hover:scale-105 transition-all duration-300" 
                         variant={plan.popular ? "default" : "outline"}
                         onClick={() => handleGetStarted(plan.name)}
                       >
                         Choose {plan.name} {plan.speed}
                       </Button>
                       <Button 
-                        className="flex-1 h-12 text-base font-semibold" 
+                        className="flex-1 h-12 text-base font-semibold hover:scale-105 transition-all duration-300" 
                         variant="outline"
                         onClick={() => {
                           document.getElementById('address-checker')?.scrollIntoView({ behavior: 'smooth' });
