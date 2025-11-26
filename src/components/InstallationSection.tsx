@@ -26,8 +26,8 @@ const InstallationSection = () => {
                     <CheckCircle2 className="w-6 h-6 text-white" strokeWidth={2} />
                   </div>
                   <div>
-                    <p className="font-bold text-foreground">100% Free</p>
-                    <p className="text-sm text-muted-foreground">No hidden costs</p>
+                    <p className="font-bold text-foreground">Only $99</p>
+                    <p className="text-sm text-muted-foreground">Professional setup</p>
                   </div>
                 </div>
               </div>
@@ -35,12 +35,17 @@ const InstallationSection = () => {
 
             <div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                Professional Setup Included
+                Professional Installation — $99
               </h2>
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Every GI NET plan includes free onsite installation by Melbourne-based technicians. 
+                Professional onsite installation by Melbourne-based technicians. 
                 We don't just plug in a modem — we optimise your entire network.
               </p>
+              <div className="bg-gradient-to-r from-primary to-accent px-6 py-3 rounded-lg mb-8 inline-block shadow-glow">
+                <p className="text-white font-semibold">
+                  Free modem + free installation with 36-month plan
+                </p>
+              </div>
 
               <div className="space-y-4 mb-8">
                 {services.map((service, idx) => (

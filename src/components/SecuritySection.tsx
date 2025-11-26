@@ -6,7 +6,7 @@ const SecuritySection = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            Enterprise-Grade Home Security
+            Enterprise-Grade Home Network Security
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Most ISPs give you one unsafe network. GI NET gives you three secure zones.

@@ -27,9 +27,14 @@ const FooterModern = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-primary" />
-                <a href={`mailto:${CANONICAL?.contact?.email?.support}`} className="text-background/90 hover:text-primary transition-colors">
-                  {CANONICAL?.contact?.email?.support || "support@ginet.au"}
-                </a>
+                <div className="flex flex-col gap-1">
+                  <a href={`mailto:${CANONICAL?.contact?.email?.sales || "sales@ginet.au"}`} className="text-background/90 hover:text-primary transition-colors">
+                    Sales: {CANONICAL?.contact?.email?.sales || "sales@ginet.au"}
+                  </a>
+                  <a href={`mailto:${CANONICAL?.contact?.email?.support || "support@ginet.au"}`} className="text-background/90 hover:text-primary transition-colors">
+                    Support: {CANONICAL?.contact?.email?.support || "support@ginet.au"}
+                  </a>
+                </div>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-primary mt-1" />
@@ -76,8 +81,7 @@ const FooterModern = () => {
         <div className="pt-8 border-t border-background/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-background/70 text-sm">
-              © {new Date().getFullYear()} {CANONICAL?.company?.name || "GI NET Pty Ltd"}. 
-              ABN {CANONICAL?.company?.abn?.formatted || "71 608 672 608"}. All rights reserved.
+              © {new Date().getFullYear()} GI NET — Australian-Owned Internet Provider. All rights reserved.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-background/10 hover:bg-primary flex items-center justify-center transition-colors">
