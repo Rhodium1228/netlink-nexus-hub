@@ -14,6 +14,7 @@ import AUP from "./pages/AUP";
 import AccessibilityAndDisability from "./pages/AccessibilityAndDisability";
 import CriticalInformationSummaries from "./pages/CriticalInformationSummaries";
 import AdminConsistencyReport from "./pages/AdminConsistencyReport";
+import TestSubscription from "./pages/TestSubscription";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/accessibility" element={<AccessibilityAndDisability />} />
           <Route path="/critical-information-summaries" element={<CriticalInformationSummaries />} />
           <Route path="/admin/consistency-report" element={<AdminConsistencyReport />} />
+          <Route path="/test/subscription" element={<TestSubscription />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
