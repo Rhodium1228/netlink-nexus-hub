@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Check, Zap, Shield, Wifi, Users, Headphones, Router } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
 import planBasicBg from "@/assets/plan-basic-bg.jpg";
 import planProBg from "@/assets/plan-pro-bg.jpg";
 import planUltraBg from "@/assets/plan-ultra-bg.jpg";
@@ -144,20 +145,36 @@ const plans = [
 
 const PlanCarousel = () => {
   const navigate = useNavigate();
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleGetStarted = (planName: string) => {
     navigate(`/signup?plan=${encodeURIComponent(planName)}`);
+  };
+
+  const handleCardHover = (index: number | null) => {
+    setHoveredCard(index);
+    if (videoRef.current) {
+      if (index !== null) {
+        videoRef.current.playbackRate = 0.5; // Slow down video on hover
+      } else {
+        videoRef.current.playbackRate = 1; // Normal speed when not hovering
+      }
+    }
   };
 
   return (
     <section id="plans" className="py-20 relative overflow-hidden">
       {/* Animated Background Video */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-15"
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+          hoveredCard !== null ? 'opacity-5' : 'opacity-15'
+        }`}
       >
         <source src={animatedBg} type="video/mp4" />
       </video>
@@ -186,18 +203,30 @@ const PlanCarousel = () => {
             {plans.map((plan, index) => (
               <CarouselItem key={index}>
                 <Card 
-                  className={`relative overflow-hidden p-8 hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] border-2 ${
+                  className={`relative overflow-hidden p-8 transition-all duration-500 border-2 ${
                     plan.popular ? 'border-primary shadow-xl' : 'border-border'
+                  } ${
+                    hoveredCard === index 
+                      ? 'shadow-2xl scale-[1.02] ring-2 ring-primary/50' 
+                      : 'hover:shadow-xl hover:scale-[1.01]'
                   }`}
+                  onMouseEnter={() => handleCardHover(index)}
+                  onMouseLeave={() => handleCardHover(null)}
                 >
                   {/* Animated Background Image */}
-                  <div className="absolute inset-0 opacity-20">
+                  <div className={`absolute inset-0 transition-opacity duration-500 ${
+                    hoveredCard === index ? 'opacity-30' : 'opacity-20'
+                  }`}>
                     <img 
                       src={plan.backgroundImage} 
                       alt={`${plan.name} plan background`}
                       className="w-full h-full object-cover animate-slow-pan"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/80 to-background/90"></div>
+                    <div className={`absolute inset-0 bg-gradient-to-br transition-opacity duration-500 ${
+                      hoveredCard === index 
+                        ? 'from-background/80 via-background/70 to-background/80' 
+                        : 'from-background/90 via-background/80 to-background/90'
+                    }`}></div>
                   </div>
                   
                   {/* Content */}
