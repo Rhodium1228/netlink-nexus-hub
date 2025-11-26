@@ -49,11 +49,11 @@ const InteractiveVLANDiagram = () => {
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <img 
           src={vlanSectionBg} 
           alt="Network topology background" 
-          className="w-full h-full object-cover opacity-30"
+          className="w-full h-full object-cover opacity-30 animate-network-flow"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-muted/40 to-background/95"></div>
       </div>
