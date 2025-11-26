@@ -1,17 +1,31 @@
 import { Button } from "@/components/ui/button";
 import { Wifi, Zap, Shield } from "lucide-react";
+import heroNetworkBg from "@/assets/hero-network-bg.jpg";
+import enterpriseModem from "@/assets/enterprise-modem.jpg";
 
 const HeroModern = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-[hsl(215,100%,30%)] to-accent">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      {/* Background Image with Gradient Overlay */}
+      <div className="absolute inset-0">
+        <img 
+          src={heroNetworkBg} 
+          alt="Network connections" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-[hsl(215,100%,30%)]/90 to-accent/85"></div>
+      </div>
+      
       {/* Animated background elements */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-secondary rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center text-white max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+          {/* Left side - Text content */}
+          <div className="text-center lg:text-left text-white">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-8 border border-white/20">
             <Zap className="w-4 h-4" />
             <span className="text-sm font-medium">Fast. Secure. Professionally installed.</span>
@@ -52,7 +66,7 @@ const HeroModern = () => {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               { icon: Zap, title: "Ultra Fast", desc: "Up to 1 Gbps speeds" },
               { icon: Shield, title: "VLAN Security", desc: "3 isolated networks" },
@@ -62,11 +76,29 @@ const HeroModern = () => {
                 key={idx} 
                 className="bg-white/90 backdrop-blur-md rounded-2xl p-6 border border-white/30 hover:bg-white hover:scale-105 transition-all shadow-xl"
               >
-                <feature.icon className="w-10 h-10 mb-3 mx-auto text-primary" />
+                <feature.icon className="w-10 h-10 mb-3 mx-auto lg:mx-0 text-primary" />
                 <h3 className="font-semibold text-lg mb-1 text-foreground">{feature.title}</h3>
                 <p className="text-muted-foreground text-sm">{feature.desc}</p>
               </div>
             ))}
+          </div>
+          </div>
+
+          {/* Right side - Enterprise Modem Visual */}
+          <div className="hidden lg:flex justify-center items-center">
+            <div className="relative w-full max-w-md animate-float">
+              <div className="absolute inset-0 bg-gradient-to-br from-secondary/40 to-accent/40 rounded-full blur-3xl"></div>
+              <div className="relative z-10 w-full aspect-square flex items-center justify-center">
+                <div className="relative w-full bg-white/5 backdrop-blur-xl rounded-3xl shadow-2xl flex items-center justify-center border border-white/10 overflow-hidden group p-12">
+                  <img 
+                    src={enterpriseModem} 
+                    alt="GI NET Enterprise Modem" 
+                    className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/20 to-transparent pointer-events-none"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
