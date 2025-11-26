@@ -13,13 +13,14 @@ const plans = [
     speed: "100 Mbps",
     price: "$75",
     period: "month — No Contract",
-    subtitle: "Great for streaming, browsing, work from home, and general use.",
+    subtitle: "Perfect for streaming, browsing, work from home, and everyday home use.",
+    bonusTag: "Chance to WIN $10,000 ACSU Giveaway Every Month",
     backgroundImage: planBasicBg,
     features: [
       {
         icon: Wifi,
         title: "Standard WiFi Network",
-        why: "Perfect for general home use with up to 10 connected devices."
+        why: "Reliable connectivity for up to 10 devices."
       },
       {
         icon: Users,
@@ -28,18 +29,18 @@ const plans = [
       },
       {
         icon: Router,
-        title: "Free Onsite Setup",
-        why: "Technician installs your service and optimises WiFi placement."
+        title: "On-Site Installation $99",
+        why: "Technician ensures perfect setup and WiFi coverage."
       },
       {
         icon: Router,
         title: "Bring Your Own Router",
-        why: "Keep your current setup or upgrade when ready."
+        why: "Keep your current hardware or upgrade anytime."
       },
       {
         icon: Zap,
         title: "Reliable Speed",
-        why: "Smooth Netflix 4K, meetings, and browsing without interruptions."
+        why: "Smooth 4K streaming and video meetings."
       }
     ],
     popular: false
@@ -49,43 +50,49 @@ const plans = [
     speed: "500 Mbps",
     price: "$95",
     period: "month — No Contract",
-    subtitle: "Perfect for gaming, CCTV streaming, 4K video, and homes with many devices.",
+    subtitle: "Designed for gaming, CCTV streaming, 4K video, and homes with many smart devices.",
+    bonusTag: "Chance to WIN $10,000 ACSU Giveaway Every Month",
     backgroundImage: planProBg,
     features: [
       {
         icon: Shield,
         title: "VLAN Separation (3 Networks)",
-        why: "Stops CCTV, TVs, and smart devices from accessing your laptops & phones. Protects your data even if an IoT device is hacked."
+        why: "Separates CCTV, smart TVs, and IoT devices from your laptops and phones. Prevents hacking spread and protects private data."
       },
       {
         icon: Shield,
         title: "Personal Secure Network",
-        why: "Keeps banking, emails, and private info away from risky devices."
+        why: "Keeps banking, emails, work accounts safe."
       },
       {
         icon: Shield,
-        title: "IoT + CCTV Network",
-        why: "Smart devices are the #1 hacking target — isolation protects your home."
+        title: "IoT + CCTV Isolated Network",
+        why: "IoT devices are easy targets — isolation protects your home."
       },
       {
         icon: Users,
-        title: "Guest WiFi (Fully Isolated)",
-        why: "Friends, tradies, or Airbnb guests can't touch your home devices."
+        title: "Guest WiFi Network",
+        why: "Visitors can use WiFi but cannot see any of your devices."
       },
       {
         icon: Router,
-        title: "WiFi 6 Router Optional ($199)",
-        why: "Stronger signal, more devices, gaming-grade performance."
+        title: "GI NET Enterprise Modem — $199",
+        why: "Built for speed, coverage, and advanced VLAN support."
+      },
+      {
+        icon: Router,
+        title: "Free GI NET Modem + Free Installation (36-Month Plan Option)",
+        why: "Long-term customers save upfront costs."
+      },
+      {
+        icon: Router,
+        title: "On-Site Installation $99",
+        why: "Technician configures VLANs, router, and WiFi optimisation."
       },
       {
         icon: Headphones,
         title: "Priority Support",
-        why: "Your service tickets jump the queue."
-      },
-      {
-        icon: Router,
-        title: "Free Onsite Installation",
-        why: "Technician configures VLANs, router settings, and coverage optimisation."
+        why: "Faster resolutions and priority queue."
       }
     ],
     popular: true
@@ -95,33 +102,39 @@ const plans = [
     speed: "1000 Mbps (Gigabit)",
     price: "$135",
     period: "month — No Contract",
-    subtitle: "Built for tech-heavy homes, content creators, offices, and multi-level properties.",
+    subtitle: "Built for creators, gamers, home offices, multi-level homes, and heavy data users.",
+    bonusTag: "Chance to WIN $10,000 ACSU Giveaway Every Month",
     backgroundImage: planUltraBg,
     features: [
       {
         icon: Zap,
-        title: "Gigabit Download & Upload",
-        why: "Zero bottlenecks for large files, cloud backups, security cameras."
+        title: "Gigabit Speed",
+        why: "Zero bottlenecks even with large backups, uploads, or 20+ devices."
       },
       {
         icon: Shield,
         title: "Full VLAN Security Suite",
-        why: "Maximum protection for CCTV and smart devices."
+        why: "Enterprise-grade protection for modern smart homes."
       },
       {
         icon: Router,
-        title: "WiFi 6 or WiFi 7 Upgrade",
-        why: "Ultimate performance for large homes."
+        title: "GI NET Enterprise Modem — $199",
+        why: "Stronger, faster, supports high device density."
+      },
+      {
+        icon: Router,
+        title: "Free GI NET Modem + Free Installation (36-Month Plan Option)",
+        why: "Best value — no upfront costs."
+      },
+      {
+        icon: Router,
+        title: "On-Site Installation $99",
+        why: "Tech ensures max speed across the entire property."
       },
       {
         icon: Users,
         title: "Multi-Home Support",
-        why: "Ideal for duplexes, granny flats, or home offices."
-      },
-      {
-        icon: Router,
-        title: "Free Installation + Pro Tuning",
-        why: "Professional setup ensures full speed across your house."
+        why: "Great for granny flats, studios, or home offices."
       }
     ],
     popular: false
@@ -180,6 +193,11 @@ const PlanCarousel = () => {
                     </div>
                   )}
                   
+                  {/* ACSU Giveaway Badge */}
+                  <div className="bg-accent/10 border border-accent/30 text-accent text-xs font-semibold px-4 py-2 rounded-lg inline-block mb-4">
+                    💰 {plan.bonusTag}
+                  </div>
+                  
                   <div className="mb-6">
                     <div className="flex items-baseline gap-2 mb-2">
                       <h3 className="text-3xl font-bold text-foreground">{plan.name.toUpperCase()}</h3>
@@ -225,7 +243,7 @@ const PlanCarousel = () => {
                         document.getElementById('coverage')?.scrollIntoView({ behavior: 'smooth' });
                       }}
                     >
-                      Check Address
+                      {index === 0 ? 'Compare Plans' : 'Check Address'}
                     </Button>
                   </div>
                   </div>
