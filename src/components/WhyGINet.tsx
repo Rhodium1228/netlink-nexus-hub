@@ -13,13 +13,13 @@ const features = [
   },
   {
     icon: Camera,
-    title: "CCTV-Optimised Networks",
+    title: "CCTV-Optimised Connectivity",
     description: "Dedicated bandwidth for security cameras and IoT devices"
   },
   {
     icon: Router,
-    title: "BYO or Upgrade Router",
-    description: "Use your own router or upgrade to WiFi 6/7 for peak performance"
+    title: "GI NET Enterprise Modem",
+    description: "Professional-grade hardware built for speed and coverage"
   },
   {
     icon: FileCheck,
@@ -39,10 +39,10 @@ const WhyGINet = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            Why thousands of customers switch to GI NET
+            Why Melbourne Families Trust GI NET
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Premium features that set us apart from traditional ISPs
+            Premium features and monthly giveaways that set us apart
           </p>
         </div>
 

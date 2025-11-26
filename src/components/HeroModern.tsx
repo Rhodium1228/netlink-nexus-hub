@@ -18,6 +18,12 @@ const HeroModern = () => {
             Safer Internet
           </h1>
           
+          <div className="inline-block bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-sm border border-white/30 px-6 py-3 rounded-full mb-8 shadow-glow">
+            <p className="text-white font-semibold text-sm md:text-base">
+              Every customer goes into the monthly ACSU Giveaway — WIN $10,000!
+            </p>
+          </div>
+          
           <p className="text-xl md:text-2xl mb-12 text-white/90 font-medium max-w-3xl mx-auto leading-relaxed">
             Fast. Secure. Professionally installed. Built for modern families and businesses.
           </p>

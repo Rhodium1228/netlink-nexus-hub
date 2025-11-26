@@ -29,6 +29,7 @@ export const CANONICAL = {
       variants: ["03 8797 3795", "(03) 8797 3795", "+61 3 8797 3795"]
     },
     email: {
+      sales: "sales@ginet.au",
       support: "support@ginet.au",
       privacy: "privacy@ginet.au",
       domain: "ginet.au"

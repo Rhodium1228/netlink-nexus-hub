@@ -30,27 +30,31 @@ const plans: Plan[] = [
     name: "BASIC",
     speed: "100 Mbps",
     price: "75",
-    subtitle: "Great for streaming, browsing, work from home, and general use.",
+    subtitle: "Perfect for streaming, browsing, work from home, and everyday home use.",
     features: [
       { 
         text: "Standard WiFi Network",
-        why: "Perfect for general home use with up to 10 connected devices."
+        why: "Reliable connectivity for up to 10 devices"
       },
       { 
         text: "Optional Guest Network",
-        why: "Visitors stay isolated from your main devices."
+        why: "Visitors stay isolated from your main devices"
       },
       { 
-        text: "Free Onsite Setup",
-        why: "Technician installs your service and optimises WiFi placement."
+        text: "On-Site Installation $99",
+        why: "Technician ensures perfect setup and WiFi coverage"
       },
       { 
         text: "Bring Your Own Router",
-        why: "Keep your current setup or upgrade when ready."
+        why: "Keep your current hardware or upgrade anytime"
       },
       { 
         text: "Reliable Speed",
-        why: "Smooth Netflix 4K, meetings, and browsing without interruptions."
+        why: "Smooth 4K streaming and video meetings"
+      },
+      { 
+        text: "ACSU Giveaway Entry",
+        why: "Chance to WIN $10,000 every month"
       }
     ],
     popular: false
@@ -59,35 +63,43 @@ const plans: Plan[] = [
     name: "PRO",
     speed: "500 Mbps",
     price: "95",
-    subtitle: "Perfect for gaming, CCTV streaming, 4K video, and homes with many devices.",
+    subtitle: "Designed for gaming, CCTV streaming, 4K video, and homes with many smart devices.",
     features: [
       { 
         text: "VLAN Separation (3 Networks)",
-        why: "Stops CCTV, TVs, and smart devices from accessing your laptops & phones. Protects your data even if an IoT device is hacked."
+        why: "Separates CCTV, smart TVs, and IoT devices from your laptops and phones. Prevents hacking spread and protects private data."
       },
       { 
         text: "Personal Secure Network",
-        why: "Keeps banking, emails, and private info away from risky devices."
+        why: "Keeps banking, emails, work accounts safe"
       },
       { 
-        text: "IoT + CCTV Network",
-        why: "Smart devices are the #1 hacking target — isolation protects your home."
+        text: "IoT + CCTV Isolated Network",
+        why: "IoT devices are easy targets — isolation protects your home"
       },
       { 
-        text: "Guest WiFi (Fully Isolated)",
-        why: "Friends, tradies, or Airbnb guests can't touch your home devices."
+        text: "Guest WiFi Network",
+        why: "Visitors can use WiFi but cannot see any of your devices"
       },
       { 
-        text: "WiFi 6 Router Optional ($199)",
-        why: "Stronger signal, more devices, gaming-grade performance."
+        text: "GI NET Enterprise Modem — $199",
+        why: "Built for speed, coverage, and advanced VLAN support"
+      },
+      { 
+        text: "Free Modem + Free Installation",
+        why: "Available with 36-month plan — save upfront costs"
+      },
+      { 
+        text: "On-Site Installation $99",
+        why: "Technician configures VLANs, router, and WiFi optimisation"
       },
       { 
         text: "Priority Support",
-        why: "Your service tickets jump the queue."
+        why: "Faster resolutions and priority queue"
       },
       { 
-        text: "Free Onsite Installation",
-        why: "Technician configures VLANs, router settings, and coverage optimisation."
+        text: "ACSU Giveaway Entry",
+        why: "Chance to WIN $10,000 every month"
       }
     ],
     popular: true
@@ -96,27 +108,35 @@ const plans: Plan[] = [
     name: "ULTRA",
     speed: "1000 Mbps",
     price: "135",
-    subtitle: "Built for tech-heavy homes, content creators, offices, and multi-level properties.",
+    subtitle: "Built for creators, gamers, home offices, multi-level homes, and heavy data users.",
     features: [
       { 
-        text: "Gigabit Download & Upload",
-        why: "Zero bottlenecks for large files, cloud backups, security cameras."
+        text: "Gigabit Speed",
+        why: "Zero bottlenecks even with large backups, uploads, or 20+ devices"
       },
       { 
         text: "Full VLAN Security Suite",
-        why: "Maximum protection for CCTV and smart devices."
+        why: "Enterprise-grade protection for modern smart homes"
       },
       { 
-        text: "WiFi 6 or WiFi 7 Upgrade",
-        why: "Ultimate performance for large homes."
+        text: "GI NET Enterprise Modem — $199",
+        why: "Stronger, faster, supports high device density"
+      },
+      { 
+        text: "Free Modem + Free Installation",
+        why: "Available with 36-month plan — best value, no upfront costs"
+      },
+      { 
+        text: "On-Site Installation $99",
+        why: "Tech ensures max speed across the entire property"
       },
       { 
         text: "Multi-Home Support",
-        why: "Ideal for duplexes, granny flats, or home offices."
+        why: "Great for granny flats, studios, or home offices"
       },
       { 
-        text: "Free Installation + Pro Tuning",
-        why: "Professional setup ensures full speed across your house."
+        text: "ACSU Giveaway Entry",
+        why: "Chance to WIN $10,000 every month"
       }
     ],
     popular: false
