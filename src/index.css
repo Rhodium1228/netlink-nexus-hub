@@ -159,6 +159,18 @@ All colors MUST be HSL.
     }
   }
 
+  @keyframes slow-pan {
+    0% {
+      transform: scale(1.1) translate(0, 0);
+    }
+    50% {
+      transform: scale(1.15) translate(-5%, -3%);
+    }
+    100% {
+      transform: scale(1.1) translate(0, 0);
+    }
+  }
+
   .animate-fade-in {
     animation: fade-in 0.3s ease-out;
   }
@@ -169,6 +181,10 @@ All colors MUST be HSL.
 
   .animate-network-flow {
     animation: network-flow 20s ease-in-out infinite;
+  }
+
+  .animate-slow-pan {
+    animation: slow-pan 30s ease-in-out infinite;
   }
 }
 
