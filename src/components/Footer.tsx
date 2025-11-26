@@ -1,92 +1,81 @@
-import { Wifi, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { CANONICAL } from "@/config/canonical";
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
-  const footerSections = [
-    {
-      title: "Services",
-      links: ["Residential Internet", "Business Solutions", "TV & Streaming", "Phone Service"]
-    },
-    {
-      title: "Support",
-      links: ["Help Center", "Network Status", "Contact Us", "Installation Guide"]
-    },
-    {
-      title: "Company",
-      links: ["About Us", "Careers", "Press Room", "Legal"]
-    }
-  ];
-
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
-          {/* Brand */}
+    <footer className="bg-gradient-to-b from-background to-muted py-16 border-t border-border">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+          {/* Brand Section */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <Wifi className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold text-primary">
-                GiNet
-              </span>
-            </div>
-            <p className="text-muted-foreground mb-4 max-w-sm">
-              Connecting communities with lightning-fast fiber-optic internet. Experience the future of connectivity today.
+            <h3 className="text-xl font-bold mb-4 text-foreground">{CANONICAL.company.displayName}</h3>
+            <p className="text-muted-foreground mb-4">
+              Australian-owned Internet Provider. Fast. Secure. Professionally installed.
             </p>
-            <div className="text-sm space-y-1 mb-6">
-              <p className="text-muted-foreground"><strong className="text-foreground">ABN:</strong> {CANONICAL.company.abn.formatted}</p>
-              <p className="text-muted-foreground"><strong className="text-foreground">Email:</strong> {CANONICAL.contact.email.support}</p>
-              <p className="text-muted-foreground"><strong className="text-foreground">Phone:</strong> {CANONICAL.contact.phone.display}</p>
+            <div className="space-y-2 text-sm text-muted-foreground">
+              <p><strong>Address:</strong><br />{CANONICAL.address.formatted}</p>
+              <p><strong>Sales:</strong> Sales@ginet.au</p>
+              <p><strong>Support:</strong> {CANONICAL.contact.email.support}</p>
+              <p><strong>Phone:</strong> {CANONICAL.contact.phone.display}</p>
             </div>
-            <div className="flex gap-4">
-              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, idx) => (
-                <a
-                  key={idx}
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary hover:text-white transition-all flex items-center justify-center"
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
+            <div className="flex gap-4 mt-4">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Facebook">
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Twitter">
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Instagram">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors" aria-label="LinkedIn">
+                <Linkedin className="w-5 h-5" />
+              </a>
             </div>
           </div>
 
-          {/* Links */}
-          {footerSections.map((section, idx) => (
-            <div key={idx}>
-              <h3 className="font-semibold text-foreground mb-4">{section.title}</h3>
-              <ul className="space-y-3">
-                {section.links.map((link, linkIdx) => (
-                  <li key={linkIdx}>
-                    <a
-                      href="#"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Plans */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-foreground">Plans</h4>
+            <ul className="space-y-2">
+              <li><a href="/#plans" className="text-muted-foreground hover:text-primary transition-colors">Residential Plans</a></li>
+              <li><a href="/#plans" className="text-muted-foreground hover:text-primary transition-colors">Business Plans</a></li>
+              <li><a href="/critical-information-summaries" className="text-muted-foreground hover:text-primary transition-colors">Plan Details (CIS)</a></li>
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-foreground">Support</h4>
+            <ul className="space-y-2">
+              <li><a href="/support" className="text-muted-foreground hover:text-primary transition-colors">Help Center</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Service Status</a></li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-foreground">Legal</h4>
+            <ul className="space-y-2">
+              <li><a href="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a></li>
+              <li><a href="/aup" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</a></li>
+              <li><a href="/consumer-advice" className="text-muted-foreground hover:text-primary transition-colors">Consumer Advice</a></li>
+              <li><a href="/accessibility-and-disability" className="text-muted-foreground hover:text-primary transition-colors">Accessibility</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div className="pt-8 border-t border-border">
-          <div className="flex flex-wrap justify-center gap-3 mb-4" style={{ fontSize: '14px' }}>
-            <a href="/privacy" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Privacy Policy</a>
-            <span className="text-muted-foreground">|</span>
-            <a href="/terms" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Terms of Service</a>
-            <span className="text-muted-foreground">|</span>
-            <a href="/business-terms" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Business Terms</a>
-            <span className="text-muted-foreground">|</span>
-            <a href="/halal-policy" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Halal Policy</a>
-            <span className="text-muted-foreground">|</span>
-            <a href="/aup" style={{ color: '#003366' }} className="hover:text-primary transition-colors">Acceptable Use Policy</a>
+        {/* Bottom Bar */}
+        <div className="border-t border-border pt-8 mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-muted-foreground">
+              © GI NET — Australian-Owned Internet Provider. All rights reserved.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              ABN: {CANONICAL.company.abn.formatted}
+            </p>
           </div>
-          <p className="text-center text-muted-foreground text-sm">
-            © 2025 {CANONICAL.company.name}. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>
