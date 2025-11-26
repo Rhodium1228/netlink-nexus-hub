@@ -21,12 +21,16 @@ const plans = [
     speed: "500 Mbps",
     price: "95",
     features: [
-      "Best for gaming & CCTV streaming",
-      "Connect up to 15 devices",
-      "Priority customer support",
-      "BYO Wi-Fi router or WiFi 6 router $199",
-      "Onsite installation included",
-      "No contracts required"
+      "🚀 500 Mbps ultra-fast speed for gaming, CCTV, 4K streaming & remote work",
+      "🔗 Supports up to 15 devices simultaneously",
+      "🛠 Priority customer support with faster resolutions",
+      "📶 BYO Wi-Fi router or WiFi 6 router $199",
+      "👨‍🔧 Free onsite installation & network setup included",
+      "1️⃣ Personal/Work VLAN (Secure Zone) for laptops & phones",
+      "2️⃣ Smart Device + CCTV VLAN (IoT Zone) for cameras & appliances",
+      "3️⃣ Guest WiFi Network (Isolated) with QR code login",
+      "🔒 Business-grade network security included",
+      "No lock-in contracts"
     ],
     popular: true
   },
