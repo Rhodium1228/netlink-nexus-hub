@@ -115,21 +115,57 @@
   .gradient-primary {
     background: var(--gradient-primary);
   }
+  
   .gradient-hero {
     background: var(--gradient-hero);
   }
+
+  .gradient-hero-enhanced {
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 25%, #2563eb 50%, #3b82f6 75%, #60a5fa 100%);
+  }
+
+  .gradient-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+  }
+
+  .gradient-overlay {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.8) 100%);
+  }
+  
   .shadow-premium {
     box-shadow: var(--shadow-premium);
   }
+  
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
+  
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
+
+  .shadow-elevated {
+    box-shadow: 
+      0 25px 50px -12px rgba(37, 99, 235, 0.25),
+      0 0 0 1px rgba(37, 99, 235, 0.05);
+  }
+
+  .shadow-glow-intense {
+    box-shadow: 
+      0 0 60px rgba(37, 99, 235, 0.4),
+      0 0 100px rgba(59, 130, 246, 0.2);
+  }
+  
   .glass-effect {
     background: var(--gradient-glass);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+  }
+
+  .glass-premium {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
 }
