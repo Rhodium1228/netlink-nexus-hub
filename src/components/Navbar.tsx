@@ -57,7 +57,7 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: "Plans", hash: "#plans" },
+    { name: "Plans", href: "/plans" },
     { name: "Coverage", hash: "#coverage" },
     { name: "Support", href: "/support" },
     { name: "About", href: "/about" }
