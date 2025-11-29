@@ -3,7 +3,7 @@ import { Wifi, Shield, Cpu, Network, Check, X } from "lucide-react";
 import enterpriseModem from "@/assets/enterprise-modem.jpg";
 
 const features = [
-  { icon: Wifi, label: "WiFi 6 Technology", description: "Latest wireless standard for maximum speed" },
+  { icon: Wifi, label: "WiFi HIDE Technology", description: "Latest wireless standard for maximum speed" },
   { icon: Shield, label: "VLAN Support", description: "Hardware-level network segmentation" },
   { icon: Cpu, label: "Enterprise Processor", description: "Powerful chipset for heavy workloads" },
   { icon: Network, label: "Multi-Device", description: "Handle 50+ simultaneous connections" },
