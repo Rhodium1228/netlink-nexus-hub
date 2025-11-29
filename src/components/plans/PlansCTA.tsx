@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Shield, Zap, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import PlanComparisonModal from "./PlanComparisonModal";
 
 const PlansCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [comparisonOpen, setComparisonOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -104,14 +105,16 @@ const PlansCTA = () => {
               size="lg" 
               variant="outline" 
               className="border-white/30 text-primary-foreground hover:bg-white/10 bg-transparent"
-              onClick={() => {
-                const element = document.getElementById("plans-comparison");
-                element?.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={() => setComparisonOpen(true)}
             >
               Compare Plans
             </Button>
           </div>
+
+          <PlanComparisonModal 
+            open={comparisonOpen} 
+            onOpenChange={setComparisonOpen} 
+          />
 
           {/* Trust Badge */}
           <p 
