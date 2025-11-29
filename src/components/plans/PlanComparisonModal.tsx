@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Check, X, Zap, Shield, Wifi, Users, Clock, Award } from "lucide-react";
 import {
   Dialog,
@@ -7,12 +8,12 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 interface PlanComparisonModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
-
 const plans = [
   {
     name: "Basic",
@@ -52,6 +53,17 @@ const features = [
 
 const PlanComparisonModal = ({ open, onOpenChange }: PlanComparisonModalProps) => {
   const navigate = useNavigate();
+  const [animateRows, setAnimateRows] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      // Small delay to ensure modal is rendered before animations start
+      const timer = setTimeout(() => setAnimateRows(true), 100);
+      return () => clearTimeout(timer);
+    } else {
+      setAnimateRows(false);
+    }
+  }, [open]);
 
   const renderValue = (value: boolean | string) => {
     if (typeof value === "boolean") {
@@ -80,10 +92,17 @@ const PlanComparisonModal = ({ open, onOpenChange }: PlanComparisonModalProps) =
           {/* Plan Headers */}
           <div className="grid grid-cols-4 gap-4 mb-6">
             <div className="col-span-1" />
-            {plans.map((plan) => (
+            {plans.map((plan, index) => (
               <div
                 key={plan.name}
-                className={`relative text-center p-4 rounded-xl bg-gradient-to-br ${plan.color} text-white`}
+                className={cn(
+                  "relative text-center p-4 rounded-xl bg-gradient-to-br text-white transition-all duration-500",
+                  plan.color,
+                  animateRows 
+                    ? "opacity-100 translate-y-0" 
+                    : "opacity-0 -translate-y-4"
+                )}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {plan.popular && (
                   <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-0.5 rounded-full">
@@ -105,9 +124,14 @@ const PlanComparisonModal = ({ open, onOpenChange }: PlanComparisonModalProps) =
             {features.map((feature, index) => (
               <div
                 key={feature.name}
-                className={`grid grid-cols-4 gap-4 p-4 items-center ${
-                  index % 2 === 0 ? "bg-muted/30" : "bg-background"
-                }`}
+                className={cn(
+                  "grid grid-cols-4 gap-4 p-4 items-center transition-all duration-300",
+                  index % 2 === 0 ? "bg-muted/30" : "bg-background",
+                  animateRows 
+                    ? "opacity-100 translate-x-0" 
+                    : "opacity-0 -translate-x-4"
+                )}
+                style={{ transitionDelay: `${300 + index * 50}ms` }}
               >
                 <div className="flex items-center gap-2">
                   <feature.icon className="w-4 h-4 text-primary" />
@@ -123,11 +147,17 @@ const PlanComparisonModal = ({ open, onOpenChange }: PlanComparisonModalProps) =
           {/* CTA Buttons */}
           <div className="grid grid-cols-4 gap-4 mt-6">
             <div className="col-span-1" />
-            {plans.map((plan) => (
+            {plans.map((plan, index) => (
               <Button
                 key={plan.name}
                 variant={plan.popular ? "default" : "outline"}
-                className="w-full"
+                className={cn(
+                  "w-full transition-all duration-500",
+                  animateRows 
+                    ? "opacity-100 translate-y-0" 
+                    : "opacity-0 translate-y-4"
+                )}
+                style={{ transitionDelay: `${900 + index * 100}ms` }}
                 onClick={() => {
                   onOpenChange(false);
                   navigate(`/signup?plan=${plan.name}`);
