@@ -10,7 +10,7 @@ const features = [
 ];
 
 const comparison = [
-  { feature: "WiFi 6 Support", ginet: true, standard: false },
+  { feature: "WiFi HIDE Support", ginet: true, standard: false },
   { feature: "VLAN Configuration", ginet: true, standard: false },
   { feature: "50+ Device Support", ginet: true, standard: false },
   { feature: "Guest Network Isolation", ginet: true, standard: false },
