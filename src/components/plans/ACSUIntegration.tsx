@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Gift, Star, Award, TrendingUp, Sparkles } from "lucide-react";
+import { Star, Award, TrendingUp, Sparkles } from "lucide-react";
+import acsuLogo from "@/assets/acsu-logo.png";
 const benefits = [{
-  icon: Gift,
+  icon: Sparkles,
   title: "$10,000 Monthly Giveaway",
   description: "Every customer automatically entered"
 }, {
@@ -111,7 +112,7 @@ const ACSUIntegration = () => {
                 </div>
 
                 <div className="relative z-10">
-                  <Gift className="w-16 h-16 text-accent mx-auto mb-4 animate-bounce" style={{
+                  <img src={acsuLogo} alt="ACSU Logo" className="w-20 h-20 mx-auto mb-4 animate-bounce" style={{
                   animationDuration: "2s"
                 }} />
                   
