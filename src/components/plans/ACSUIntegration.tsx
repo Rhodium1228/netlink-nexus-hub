@@ -1,35 +1,40 @@
 import { useEffect, useRef, useState } from "react";
 import { Gift, Star, Award, TrendingUp, Sparkles } from "lucide-react";
-
-const benefits = [
-  { icon: Gift, title: "$10,000 Monthly Giveaway", description: "Every customer automatically entered" },
-  { icon: Star, title: "Loyalty Points", description: "Earn points with every bill payment" },
-  { icon: Award, title: "Exclusive Rewards", description: "Access special member-only offers" },
-  { icon: TrendingUp, title: "Grow Your Benefits", description: "More rewards the longer you stay" },
-];
-
+const benefits = [{
+  icon: Gift,
+  title: "$10,000 Monthly Giveaway",
+  description: "Every customer automatically entered"
+}, {
+  icon: Star,
+  title: "Loyalty Points",
+  description: "Earn points with every bill payment"
+}, {
+  icon: Award,
+  title: "Exclusive Rewards",
+  description: "Access special member-only offers"
+}, {
+  icon: TrendingUp,
+  title: "Grow Your Benefits",
+  description: "More rewards the longer you stay"
+}];
 const ACSUIntegration = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [animatedValue, setAnimatedValue] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-
     return () => observer.disconnect();
   }, []);
 
@@ -40,7 +45,6 @@ const ACSUIntegration = () => {
     const steps = 60;
     const increment = 10000 / steps;
     let current = 0;
-    
     const timer = setInterval(() => {
       current += increment;
       if (current >= 10000) {
@@ -50,12 +54,9 @@ const ACSUIntegration = () => {
         setAnimatedValue(Math.floor(current));
       }
     }, duration / steps);
-
     return () => clearInterval(timer);
   }, [isVisible]);
-
-  return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-b from-background to-primary/5 overflow-hidden">
+  return <section ref={sectionRef} className="py-24 bg-gradient-to-b from-background to-primary/5 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
@@ -81,19 +82,13 @@ const ACSUIntegration = () => {
 
             {/* Benefits Grid */}
             <div className="grid grid-cols-2 gap-4">
-              {benefits.map((benefit, index) => (
-                <div
-                  key={benefit.title}
-                  className={`p-4 rounded-xl bg-card border border-border hover:border-accent/50 transition-all duration-300 ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                  }`}
-                  style={{ transitionDelay: `${200 + index * 100}ms` }}
-                >
+              {benefits.map((benefit, index) => <div key={benefit.title} className={`p-4 rounded-xl bg-card border border-border hover:border-accent/50 transition-all duration-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`} style={{
+              transitionDelay: `${200 + index * 100}ms`
+            }}>
                   <benefit.icon className="w-8 h-8 text-accent mb-3" />
                   <h4 className="font-semibold text-foreground text-sm mb-1">{benefit.title}</h4>
                   <p className="text-xs text-muted-foreground">{benefit.description}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
 
@@ -107,22 +102,18 @@ const ACSUIntegration = () => {
               <div className="relative bg-gradient-to-br from-card to-accent/10 rounded-3xl border border-accent/30 p-8 text-center overflow-hidden">
                 {/* Sparkles Animation */}
                 <div className="absolute inset-0 overflow-hidden">
-                  {[...Array(12)].map((_, i) => (
-                    <Sparkles
-                      key={i}
-                      className="absolute w-4 h-4 text-accent/40 animate-float"
-                      style={{
-                        top: `${Math.random() * 100}%`,
-                        left: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 3}s`,
-                        animationDuration: `${3 + Math.random() * 2}s`,
-                      }}
-                    />
-                  ))}
+                  {[...Array(12)].map((_, i) => <Sparkles key={i} className="absolute w-4 h-4 text-accent/40 animate-float" style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  animationDuration: `${3 + Math.random() * 2}s`
+                }} />)}
                 </div>
 
                 <div className="relative z-10">
-                  <Gift className="w-16 h-16 text-accent mx-auto mb-4 animate-bounce" style={{ animationDuration: "2s" }} />
+                  <Gift className="w-16 h-16 text-accent mx-auto mb-4 animate-bounce" style={{
+                  animationDuration: "2s"
+                }} />
                   
                   <p className="text-sm text-muted-foreground mb-2">Monthly Prize Pool</p>
                   
@@ -134,7 +125,7 @@ const ACSUIntegration = () => {
 
                   <div className="bg-background/50 backdrop-blur-sm rounded-xl p-4">
                     <p className="text-sm text-muted-foreground">
-                      Every GI NET customer is <span className="text-accent font-semibold">automatically entered</span> into 
+                      Every GI NET customer is <span className="font-semibold text-destructive">automatically entered</span> into 
                       the monthly draw. No extra steps, no additional cost.
                     </p>
                   </div>
@@ -149,8 +140,6 @@ const ACSUIntegration = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ACSUIntegration;
