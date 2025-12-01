@@ -12,6 +12,7 @@ const PLAN_PRICES: Record<string, string> = {
   Basic: "price_1SZRDwL2p33M6UKuJsCg8wwa",
   Pro: "price_1SZREAL2p33M6UKuIJEqwrqv",
   Ultra: "price_1SZRENL2p33M6UKuOaMwwWK0",
+  Halal: "price_1SZRQrL2p33M6UKuHcGxENgf",
 };
 
 serve(async (req) => {
