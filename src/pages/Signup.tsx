@@ -36,6 +36,18 @@ const planDetails: Record<string, { speed: string; price: number; features: stri
       "ACSU Giveaway Entry"
     ]
   },
+  Halal: {
+    speed: "500 Mbps",
+    price: 95,
+    features: [
+      "Family-Safe Filtering",
+      "Content Protection",
+      "4K Streaming Ready",
+      "Up to 30 Devices",
+      "Priority Support",
+      "ACSU Giveaway Entry"
+    ]
+  },
   Ultra: {
     speed: "1000 Mbps (Gigabit)",
     price: 135,
