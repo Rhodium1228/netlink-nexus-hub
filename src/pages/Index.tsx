@@ -10,14 +10,12 @@ import BusinessPlans from "@/components/BusinessPlans";
 import NBNAvailabilityCheck from "@/components/NBNAvailabilityCheck";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navbar />
       <main className="pt-20">
         <HeroModern />
-        <AddressCheckerModern />
+        
         <PlanCarousel />
         <WhyGINet />
         <InteractiveVLANDiagram />
@@ -30,8 +28,6 @@ const Index = () => {
       </main>
       <Footer />
       <CookieConsent />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
