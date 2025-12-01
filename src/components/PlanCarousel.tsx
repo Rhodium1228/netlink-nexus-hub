@@ -100,6 +100,53 @@ const plans = [
     popular: true
   },
   {
+    name: "Halal",
+    speed: "500 Mbps",
+    price: "$95",
+    period: "month — No Contract",
+    subtitle: "Filtered internet with network-level protection for safe digital environments.",
+    bonusTag: "Chance to WIN $10,000 ACSU Giveaway Every Month",
+    backgroundImage: planProBg,
+    features: [
+      {
+        icon: Shield,
+        title: "Family-Safe Content Filtering",
+        why: "Network-level protection blocks inappropriate content before it reaches any device."
+      },
+      {
+        icon: Shield,
+        title: "Adult & Gambling Site Blocking",
+        why: "Peace of mind knowing harmful sites are blocked at the router level."
+      },
+      {
+        icon: Wifi,
+        title: "500 Mbps Fast Speed",
+        why: "Smooth 4K streaming, gaming, and video calls for the whole family."
+      },
+      {
+        icon: Users,
+        title: "Up to 30 Devices",
+        why: "Connect all family devices without slowdowns."
+      },
+      {
+        icon: Router,
+        title: "GI NET Enterprise Modem — $199",
+        why: "Built for speed, coverage, and content filtering support."
+      },
+      {
+        icon: Router,
+        title: "On-Site Installation $99",
+        why: "Technician configures filtering and WiFi optimisation."
+      },
+      {
+        icon: Headphones,
+        title: "Priority Support",
+        why: "Faster resolutions and priority queue."
+      }
+    ],
+    popular: false
+  },
+  {
     name: "Ultra",
     speed: "1000 Mbps (Gigabit)",
     price: "$135",
