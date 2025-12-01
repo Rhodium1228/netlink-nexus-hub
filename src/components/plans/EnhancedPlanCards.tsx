@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import planProDetail from "@/assets/plan-pro-detail.png";
+import plansSectionVideo from "@/assets/plans-section-video.mp4";
 
 const plans = [
   {
@@ -117,8 +118,22 @@ const EnhancedPlanCards = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-background" id="plans-comparison">
-      <div className="container mx-auto px-6">
+    <section ref={sectionRef} className="py-24 relative overflow-hidden" id="plans-comparison">
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src={plansSectionVideo} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+      </div>
+      
+      <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
