@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Wifi, Zap, Shield, ArrowRight, ChevronDown } from "lucide-react";
 import enterpriseModem from "@/assets/enterprise-modem.jpg";
 import heroVideo from "@/assets/plan-background-animated.mp4";
+import HeroParticles from "./HeroParticles";
 
 const HeroModern = () => {
   return (
@@ -18,28 +19,34 @@ const HeroModern = () => {
           <source src={heroVideo} type="video/mp4" />
         </video>
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
       </div>
 
+      {/* Dynamic Particle System */}
+      <HeroParticles />
+
       {/* Animated overlay elements */}
-      <div className="absolute inset-0 overflow-hidden z-1">
+      <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 1 }}>
         {/* Gradient orbs */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl animate-pulse-soft" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-soft delay-200" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-primary/5 to-transparent rounded-full animate-pulse-slow" />
         
-        {/* Animated network lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-              <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="1" />
-              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <line x1="0" y1="25%" x2="100%" y2="25%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-draw-line" />
-          <line x1="0" y1="50%" x2="100%" y2="50%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-draw-line delay-200" />
-          <line x1="0" y1="75%" x2="100%" y2="75%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-draw-line delay-400" />
-        </svg>
+        {/* Floating network nodes */}
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-primary/30 rounded-full animate-float"
+            style={{
+              left: `${10 + i * 12}%`,
+              top: `${20 + (i % 3) * 25}%`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${4 + i * 0.5}s`,
+            }}
+          >
+            <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping" style={{ animationDuration: "2s" }} />
+          </div>
+        ))}
       </div>
 
       <div className="content-container relative z-10 pt-20">
