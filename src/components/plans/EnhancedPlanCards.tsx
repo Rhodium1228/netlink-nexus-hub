@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Star, Wifi, Shield, Filter, Zap, Gift, ArrowRight, ImageIcon, Volume2, VolumeX } from "lucide-react";
+import { Check, Star, Wifi, Shield, Filter, Zap, Gift, ArrowRight, ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import planProDetail from "@/assets/plan-pro-detail.png";
 import planProVideo from "@/assets/plans-section-video.mp4";
 
 const plans = [
@@ -15,6 +13,7 @@ const plans = [
     icon: Wifi,
     color: "from-slate-500 to-slate-600",
     popular: false,
+    video: null,
     features: [
       "Unlimited data",
       "HD streaming ready",
@@ -32,7 +31,6 @@ const plans = [
     icon: Shield,
     color: "from-primary to-secondary",
     popular: true,
-    detailImage: planProDetail,
     video: planProVideo,
     features: [
       "Unlimited data",
@@ -54,6 +52,7 @@ const plans = [
     icon: Filter,
     color: "from-emerald-500 to-teal-500",
     popular: false,
+    video: null,
     features: [
       "Unlimited data",
       "4K streaming ready",
@@ -73,6 +72,7 @@ const plans = [
     icon: Zap,
     color: "from-violet-500 to-purple-600",
     popular: false,
+    video: null,
     features: [
       "Unlimited data",
       "8K streaming ready",
@@ -89,62 +89,37 @@ const plans = [
 ];
 
 const EnhancedPlanCards = () => {
-  const [visibleCards, setVisibleCards] = useState<number[]>([]);
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [mutedCards, setMutedCards] = useState<Record<number, boolean>>({});
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
+  const [currentIndex, setCurrentIndex] = useState(1); // Start with Pro plan
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const navigate = useNavigate();
 
-  const handleMouseEnter = (index: number) => {
-    setHoveredCard(index);
-    const video = videoRefs.current[index];
-    if (video) {
-      video.currentTime = 0;
-      video.play();
-    }
+  const currentPlan = plans[currentIndex];
+
+  const goToPrevious = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => (prev === 0 ? plans.length - 1 : prev - 1));
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
-  const handleMouseLeave = (index: number) => {
-    setHoveredCard(null);
-    const video = videoRefs.current[index];
-    if (video) {
-      video.pause();
-      video.currentTime = 0;
-    }
-  };
-
-  const toggleMute = (index: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setMutedCards(prev => ({ ...prev, [index]: !prev[index] }));
+  const goToNext = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((prev) => (prev === plans.length - 1 ? 0 : prev + 1));
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            plans.forEach((_, index) => {
-              setTimeout(() => {
-                setVisibleCards((prev) => [...prev, index]);
-              }, index * 150);
-            });
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (videoRef.current && currentPlan.video) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
     }
-
-    return () => observer.disconnect();
-  }, []);
+  }, [currentIndex, currentPlan.video]);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-background" id="plans-comparison">
+    <section className="py-24 bg-background" id="plans-comparison">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -159,159 +134,183 @@ const EnhancedPlanCards = () => {
           </p>
         </div>
 
-        {/* Plans Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Plan Navigation Dots */}
+        <div className="flex justify-center gap-3 mb-8">
           {plans.map((plan, index) => (
-            <div
+            <button
               key={plan.name}
-              className={`relative group rounded-2xl border transition-all duration-500 overflow-hidden ${
-                plan.popular 
-                  ? "border-primary bg-gradient-to-b from-primary/5 to-background" 
-                  : "border-border bg-card"
-              } ${
-                visibleCards.includes(index) 
-                  ? "opacity-100 translate-y-0" 
-                  : "opacity-0 translate-y-8"
-              } ${
-                hoveredCard === index ? "scale-[1.02] shadow-2xl z-10" : "scale-100"
+              onClick={() => {
+                if (!isAnimating) {
+                  setIsAnimating(true);
+                  setCurrentIndex(index);
+                  setTimeout(() => setIsAnimating(false), 500);
+                }
+              }}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                currentIndex === index
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
               }`}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={() => handleMouseLeave(index)}
             >
-              {/* Video Background on Hover */}
-              {'video' in plan && plan.video && (
-                <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${hoveredCard === index ? 'opacity-100' : 'opacity-0'}`}>
+              <plan.icon className="w-4 h-4" />
+              <span className="text-sm font-medium">{plan.name}</span>
+              {plan.popular && currentIndex === index && (
+                <Star className="w-3 h-3 fill-current" />
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* Main Card */}
+        <div className="relative max-w-6xl mx-auto">
+          {/* Navigation Arrows */}
+          <button
+            onClick={goToPrevious}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 z-20 p-3 rounded-full bg-background border border-border shadow-lg hover:bg-muted transition-colors"
+          >
+            <ChevronLeft className="w-6 h-6 text-foreground" />
+          </button>
+          <button
+            onClick={goToNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 z-20 p-3 rounded-full bg-background border border-border shadow-lg hover:bg-muted transition-colors"
+          >
+            <ChevronRight className="w-6 h-6 text-foreground" />
+          </button>
+
+          <div
+            className={`grid lg:grid-cols-2 gap-8 rounded-3xl border overflow-hidden transition-all duration-500 ${
+              currentPlan.popular
+                ? "border-primary shadow-xl shadow-primary/10"
+                : "border-border"
+            } ${isAnimating ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}
+          >
+            {/* Left Side - Plan Details */}
+            <div className="p-8 lg:p-12 bg-card flex flex-col justify-center">
+              {/* Popular Badge */}
+              {currentPlan.popular && (
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-primary to-secondary rounded-full w-fit mb-6">
+                  <Star className="w-4 h-4 fill-primary-foreground text-primary-foreground" />
+                  <span className="text-sm font-bold text-primary-foreground">MOST POPULAR</span>
+                </div>
+              )}
+
+              {/* Plan Icon & Name */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${currentPlan.color} flex items-center justify-center`}>
+                  <currentPlan.icon className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-3xl font-bold text-foreground">{currentPlan.name}</h3>
+                  <span className="text-lg text-muted-foreground">{currentPlan.speed}</span>
+                </div>
+              </div>
+
+              {/* Price */}
+              <div className="mb-6">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl font-bold text-foreground">${currentPlan.price}</span>
+                  <span className="text-xl text-muted-foreground">/month</span>
+                </div>
+              </div>
+
+              {/* Description */}
+              <p className="text-lg text-muted-foreground mb-6">{currentPlan.description}</p>
+
+              {/* Speed Bar */}
+              <div className="mb-6">
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-muted-foreground">Speed</span>
+                  <span className="text-foreground font-medium">{currentPlan.speed}</span>
+                </div>
+                <div className="h-3 bg-muted rounded-full overflow-hidden">
+                  <div
+                    className={`h-full bg-gradient-to-r ${currentPlan.color} rounded-full transition-all duration-1000 ease-out`}
+                    style={{ width: `${currentPlan.speedPercent}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* ACSU Badge */}
+              <div className="flex items-center gap-3 px-4 py-3 bg-accent/20 rounded-xl mb-6">
+                <Gift className="w-5 h-5 text-accent" />
+                <span className="font-medium text-foreground">WIN $10,000 ACSU Giveaway Entry</span>
+              </div>
+
+              {/* Features */}
+              <ul className="space-y-3 mb-8">
+                {currentPlan.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-3">
+                    <Check className={`w-5 h-5 flex-shrink-0 ${currentPlan.popular ? "text-primary" : "text-secondary"}`} />
+                    <span className="text-foreground">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  size="lg"
+                  className="flex-1 group"
+                  onClick={() => navigate(`/signup?plan=${encodeURIComponent(currentPlan.name)}`)}
+                >
+                  Get {currentPlan.name}
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
+
+              <p className="text-sm text-center text-muted-foreground mt-4">
+                36-month: Free modem + Free installation
+              </p>
+            </div>
+
+            {/* Right Side - Video */}
+            <div className="relative bg-gradient-to-br from-muted to-muted/50 min-h-[400px] lg:min-h-full flex items-center justify-center">
+              {currentPlan.video ? (
+                <>
                   <video
-                    ref={el => videoRefs.current[index] = el}
-                    src={plan.video}
-                    muted={mutedCards[index] !== false}
+                    ref={videoRef}
+                    src={currentPlan.video}
+                    muted={isMuted}
                     loop
                     playsInline
+                    autoPlay
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
                   {/* Mute/Unmute Button */}
                   <button
-                    onClick={(e) => toggleMute(index, e)}
-                    className="absolute top-4 right-4 z-20 p-2 rounded-full bg-background/80 hover:bg-background transition-colors"
+                    onClick={() => setIsMuted(!isMuted)}
+                    className="absolute bottom-4 right-4 z-20 p-3 rounded-full bg-background/80 hover:bg-background transition-colors"
                   >
-                    {mutedCards[index] === false ? (
-                      <Volume2 className="w-4 h-4 text-foreground" />
+                    {isMuted ? (
+                      <VolumeX className="w-5 h-5 text-muted-foreground" />
                     ) : (
-                      <VolumeX className="w-4 h-4 text-muted-foreground" />
+                      <Volume2 className="w-5 h-5 text-foreground" />
                     )}
                   </button>
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center p-8 text-center">
+                  <div className={`w-32 h-32 rounded-3xl bg-gradient-to-br ${currentPlan.color} flex items-center justify-center mb-6`}>
+                    <currentPlan.icon className="w-16 h-16 text-white" />
+                  </div>
+                  <h4 className="text-2xl font-bold text-foreground mb-2">{currentPlan.name} Plan</h4>
+                  <p className="text-muted-foreground">{currentPlan.speed} • ${currentPlan.price}/mo</p>
                 </div>
               )}
-              {/* Popular Badge */}
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-secondary rounded-full">
-                  <span className="text-xs font-bold text-primary-foreground flex items-center gap-1">
-                    <Star className="w-3 h-3 fill-current" /> MOST POPULAR
-                  </span>
-                </div>
-              )}
-
-              <div className="p-6 relative z-10">
-                {/* Plan Icon & Name */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${plan.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <plan.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-foreground">{plan.name}</h3>
-                    <span className="text-sm text-muted-foreground">{plan.speed}</span>
-                  </div>
-                </div>
-
-                {/* Speed Bar */}
-                <div className="mb-4">
-                  <div className="h-2 bg-muted rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full bg-gradient-to-r ${plan.color} rounded-full transition-all duration-1000 ease-out`}
-                      style={{ 
-                        width: visibleCards.includes(index) ? `${plan.speedPercent}%` : "0%",
-                        transitionDelay: `${index * 150 + 300}ms`
-                      }}
-                    />
-                  </div>
-                </div>
-
-                {/* Price */}
-                <div className="mb-4">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-bold text-foreground">${plan.price}</span>
-                    <span className="text-muted-foreground">/month</span>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-sm text-muted-foreground mb-6">{plan.description}</p>
-
-                {/* ACSU Badge */}
-                <div className="flex items-center gap-2 px-3 py-2 bg-accent/20 rounded-lg mb-6">
-                  <Gift className="w-4 h-4 text-accent" />
-                  <span className="text-xs font-medium text-foreground">WIN $10,000 ACSU Giveaway Entry</span>
-                </div>
-
-                {/* Features */}
-                <ul className="space-y-3 mb-6">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li 
-                      key={feature} 
-                      className={`flex items-center gap-2 text-sm transition-all duration-300 ${
-                        visibleCards.includes(index) 
-                          ? "opacity-100 translate-x-0" 
-                          : "opacity-0 -translate-x-4"
-                      }`}
-                      style={{ transitionDelay: `${(index * 150) + (featureIndex * 50) + 200}ms` }}
-                    >
-                      <Check className={`w-4 h-4 flex-shrink-0 ${plan.popular ? "text-primary" : "text-secondary"}`} />
-                      <span className="text-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Detail Image Button */}
-                {'detailImage' in plan && plan.detailImage && (
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        className="w-full mb-4 text-primary hover:text-primary/80 hover:bg-primary/10"
-                      >
-                        <ImageIcon className="w-4 h-4 mr-2" />
-                        View Plan Details
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-4xl p-2 bg-background/95 backdrop-blur-sm">
-                      <img 
-                        src={plan.detailImage} 
-                        alt={`${plan.name} plan details`}
-                        className="w-full h-auto rounded-lg"
-                      />
-                    </DialogContent>
-                  </Dialog>
-                )}
-
-                {/* CTA Button */}
-                <Button 
-                  className={`w-full group/btn ${plan.popular ? "" : "variant-outline"}`}
-                  variant={plan.popular ? "default" : "outline"}
-                  onClick={() => navigate(`/signup?plan=${encodeURIComponent(plan.name)}`)}
-                >
-                  Get {plan.name}
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-
-                {/* 36-Month Option */}
-                <p className="text-xs text-center text-muted-foreground mt-4">
-                  36-month: Free modem + Free installation
-                </p>
-              </div>
             </div>
-          ))}
+          </div>
+
+          {/* Plan Counter */}
+          <div className="flex justify-center mt-6 gap-2">
+            {plans.map((_, index) => (
+              <div
+                key={index}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  currentIndex === index ? "w-8 bg-primary" : "w-2 bg-muted"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
