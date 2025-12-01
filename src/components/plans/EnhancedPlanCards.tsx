@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Star, Wifi, Shield, Filter, Zap, Gift, ArrowRight, ImageIcon } from "lucide-react";
+import { Check, Star, Wifi, Shield, Filter, Zap, Gift, ArrowRight, ImageIcon, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import planProDetail from "@/assets/plan-pro-detail.png";
-import plansSectionVideo from "@/assets/plans-section-video.mp4";
+import planProVideo from "@/assets/plans-section-video.mp4";
 
 const plans = [
   {
@@ -33,6 +33,7 @@ const plans = [
     color: "from-primary to-secondary",
     popular: true,
     detailImage: planProDetail,
+    video: planProVideo,
     features: [
       "Unlimited data",
       "4K streaming ready",
@@ -90,8 +91,33 @@ const plans = [
 const EnhancedPlanCards = () => {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [mutedCards, setMutedCards] = useState<Record<number, boolean>>({});
   const sectionRef = useRef<HTMLDivElement>(null);
+  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
   const navigate = useNavigate();
+
+  const handleMouseEnter = (index: number) => {
+    setHoveredCard(index);
+    const video = videoRefs.current[index];
+    if (video) {
+      video.currentTime = 0;
+      video.play();
+    }
+  };
+
+  const handleMouseLeave = (index: number) => {
+    setHoveredCard(null);
+    const video = videoRefs.current[index];
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+  };
+
+  const toggleMute = (index: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setMutedCards(prev => ({ ...prev, [index]: !prev[index] }));
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -118,22 +144,8 @@ const EnhancedPlanCards = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden" id="plans-comparison">
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0">
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src={plansSectionVideo} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
-      </div>
-      
-      <div className="container mx-auto px-6 relative z-10">
+    <section ref={sectionRef} className="py-24 bg-background" id="plans-comparison">
+      <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -152,7 +164,7 @@ const EnhancedPlanCards = () => {
           {plans.map((plan, index) => (
             <div
               key={plan.name}
-              className={`relative group rounded-2xl border transition-all duration-500 ${
+              className={`relative group rounded-2xl border transition-all duration-500 overflow-hidden ${
                 plan.popular 
                   ? "border-primary bg-gradient-to-b from-primary/5 to-background" 
                   : "border-border bg-card"
@@ -163,9 +175,34 @@ const EnhancedPlanCards = () => {
               } ${
                 hoveredCard === index ? "scale-[1.02] shadow-2xl z-10" : "scale-100"
               }`}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={() => handleMouseLeave(index)}
             >
+              {/* Video Background on Hover */}
+              {'video' in plan && plan.video && (
+                <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${hoveredCard === index ? 'opacity-100' : 'opacity-0'}`}>
+                  <video
+                    ref={el => videoRefs.current[index] = el}
+                    src={plan.video}
+                    muted={mutedCards[index] !== false}
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
+                  {/* Mute/Unmute Button */}
+                  <button
+                    onClick={(e) => toggleMute(index, e)}
+                    className="absolute top-4 right-4 z-20 p-2 rounded-full bg-background/80 hover:bg-background transition-colors"
+                  >
+                    {mutedCards[index] === false ? (
+                      <Volume2 className="w-4 h-4 text-foreground" />
+                    ) : (
+                      <VolumeX className="w-4 h-4 text-muted-foreground" />
+                    )}
+                  </button>
+                </div>
+              )}
               {/* Popular Badge */}
               {plan.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-secondary rounded-full">
@@ -175,7 +212,7 @@ const EnhancedPlanCards = () => {
                 </div>
               )}
 
-              <div className="p-6">
+              <div className="p-6 relative z-10">
                 {/* Plan Icon & Name */}
                 <div className="flex items-center gap-3 mb-4">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${plan.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
