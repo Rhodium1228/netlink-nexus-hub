@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Star, Wifi, Shield, Filter, Zap, Gift, ArrowRight, ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import planProVideo from "@/assets/plans-section-video.mp4";
 
 const plans = [
   {
@@ -31,7 +30,7 @@ const plans = [
     icon: Shield,
     color: "from-primary to-secondary",
     popular: true,
-    video: planProVideo,
+    video: "/videos/plan-pro-video.mp4",
     features: [
       "Unlimited data",
       "4K streaming ready",
@@ -264,7 +263,7 @@ const EnhancedPlanCards = () => {
             </div>
 
             {/* Right Side - Video */}
-            <div className="relative bg-gradient-to-br from-muted to-muted/50 min-h-[400px] lg:min-h-full flex items-center justify-center">
+            <div className="relative bg-gradient-to-br from-muted to-muted/50 min-h-[400px] lg:min-h-[600px] flex items-center justify-center overflow-hidden">
               {currentPlan.video ? (
                 <>
                   <video
@@ -274,7 +273,7 @@ const EnhancedPlanCards = () => {
                     loop
                     playsInline
                     autoPlay
-                    className="w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-contain bg-black"
                   />
                   {/* Mute/Unmute Button */}
                   <button
