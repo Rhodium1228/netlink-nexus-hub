@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -37,45 +37,83 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="container mx-auto px-6">
+    <section className="section-padding bg-background">
+      <div className="content-container">
+        {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+          <span className="inline-block text-sm font-medium text-primary mb-4 tracking-wide uppercase">
+            Testimonials
+          </span>
+          <h2 className="heading-lg mb-4">
             What Our Customers Say
           </h2>
-          <p className="text-xl text-muted-foreground">
+          <p className="body-lg max-w-2xl mx-auto">
             Real reviews from real customers across Melbourne
           </p>
         </div>
 
+        {/* Testimonials Carousel */}
         <Carousel 
-          className="max-w-5xl mx-auto"
+          className="max-w-6xl mx-auto"
           opts={{
-            align: "center",
+            align: "start",
             loop: true,
           }}
         >
-          <CarouselContent>
+          <CarouselContent className="-ml-4">
             {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <Card className="p-6 h-full hover:shadow-xl transition-all">
-                  <div className="flex gap-1 mb-4">
+              <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <Card className="h-full p-6 bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+                  {/* Quote icon */}
+                  <Quote className="w-8 h-8 text-primary/20 mb-4" />
+                  
+                  {/* Rating */}
+                  <div className="flex gap-0.5 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                      <Star key={i} className="w-4 h-4 fill-warning text-warning" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground mb-6 italic">"{testimonial.text}"</p>
-                  <div>
-                    <p className="font-semibold text-foreground">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                  
+                  {/* Quote text */}
+                  <p className="text-foreground mb-6 leading-relaxed">"{testimonial.text}"</p>
+                  
+                  {/* Author */}
+                  <div className="flex items-center gap-3 pt-4 border-t border-border">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <span className="text-sm font-semibold text-primary">
+                        {testimonial.name.charAt(0)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground text-sm">{testimonial.name}</p>
+                      <p className="text-xs text-muted-foreground">{testimonial.location}</p>
+                    </div>
                   </div>
                 </Card>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="hidden md:flex -left-4" />
+          <CarouselNext className="hidden md:flex -right-4" />
         </Carousel>
+
+        {/* Trust indicators */}
+        <div className="flex flex-wrap justify-center items-center gap-8 mt-16 pt-8 border-t border-border">
+          <div className="text-center">
+            <p className="text-3xl font-bold text-foreground">5,000+</p>
+            <p className="text-sm text-muted-foreground">Happy Customers</p>
+          </div>
+          <div className="w-px h-12 bg-border hidden sm:block" />
+          <div className="text-center">
+            <p className="text-3xl font-bold text-foreground">4.9/5</p>
+            <p className="text-sm text-muted-foreground">Average Rating</p>
+          </div>
+          <div className="w-px h-12 bg-border hidden sm:block" />
+          <div className="text-center">
+            <p className="text-3xl font-bold text-foreground">99.9%</p>
+            <p className="text-sm text-muted-foreground">Uptime SLA</p>
+          </div>
+        </div>
       </div>
     </section>
   );
