@@ -121,7 +121,7 @@ const ACSUIntegration = () => {
                     ${animatedValue.toLocaleString()}
                   </div>
                   
-                  <p className="text-accent font-semibold mb-6">ACSU Giveaway</p>
+                  <p className="font-semibold mb-6 text-red-400">ACSU Giveaway</p>
 
                   <div className="bg-background/50 backdrop-blur-sm rounded-xl p-4">
                     <p className="text-sm text-muted-foreground">
