@@ -221,7 +221,7 @@ const EnhancedPlanCards = () => {
                 <Button 
                   className={`w-full group/btn ${plan.popular ? "" : "variant-outline"}`}
                   variant={plan.popular ? "default" : "outline"}
-                  onClick={() => navigate("/signup", { state: { planName: plan.name } })}
+                  onClick={() => navigate(`/signup?plan=${encodeURIComponent(plan.name)}`)}
                 >
                   Get {plan.name}
                   <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
