@@ -62,7 +62,7 @@ const plans = [
   },
   {
     name: "Ultra",
-    speed: "1 Gbps",
+    speed: "1000 Mbps (Gigabit)",
     price: 135,
     description: "For power users, 4K CCTV systems, businesses, and heavy multi-device homes.",
     icon: Zap,
