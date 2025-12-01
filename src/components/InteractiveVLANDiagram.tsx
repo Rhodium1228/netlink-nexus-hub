@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Shield, Smartphone, Laptop, Camera, Tv, Speaker, Users, Wifi, Lock, AlertTriangle } from "lucide-react";
-import vlanSectionBg from "@/assets/vlan-section-bg.jpg";
 
 type VLANZone = "personal" | "iot" | "guest" | null;
 
@@ -22,9 +21,9 @@ const InteractiveVLANDiagram = () => {
     },
     iot: {
       name: "IoT + CCTV Network",
-      color: "from-accent to-accent/80",
-      borderColor: "border-accent",
-      bgColor: "bg-accent/10",
+      color: "from-warning to-warning/80",
+      borderColor: "border-warning",
+      bgColor: "bg-warning/10",
       devices: [
         { icon: Camera, name: "CCTV" },
         { icon: Tv, name: "Smart TV" },
@@ -34,9 +33,9 @@ const InteractiveVLANDiagram = () => {
     },
     guest: {
       name: "Guest WiFi Network",
-      color: "from-secondary to-secondary/80",
-      borderColor: "border-secondary",
-      bgColor: "bg-secondary/10",
+      color: "from-success to-success/80",
+      borderColor: "border-success",
+      bgColor: "bg-success/10",
       devices: [
         { icon: Users, name: "Visitors" },
         { icon: Smartphone, name: "Guest Phones" },
@@ -47,120 +46,93 @@ const InteractiveVLANDiagram = () => {
   };
 
   return (
-    <section className="py-20 relative overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 overflow-hidden">
-        <img 
-          src={vlanSectionBg} 
-          alt="Network topology background" 
-          className="w-full h-full object-cover opacity-30 animate-network-flow"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-muted/40 to-background/95"></div>
-      </div>
-      
-      <div className="container mx-auto px-6 relative z-10">
+    <section className="section-padding bg-card border-y border-border">
+      <div className="content-container">
+        {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+          <span className="inline-block text-sm font-medium text-primary mb-4 tracking-wide uppercase">
+            Network Security
+          </span>
+          <h2 className="heading-lg mb-4">
             Enterprise-Grade Home Security
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="body-lg max-w-3xl mx-auto">
             Most ISPs give you one unsafe network. GI NET gives you three secure zones.
           </p>
         </div>
 
         {/* Main Diagram */}
-        <div className="max-w-7xl mx-auto mb-16">
-          <div className="relative min-h-[700px] lg:min-h-[800px]">
+        <div className="max-w-6xl mx-auto mb-16">
+          <div className="relative min-h-[600px] lg:min-h-[650px]">
             {/* Central Router */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-              <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${
-                hoveredZone ? 'from-foreground to-foreground/80 scale-110' : 'from-primary to-accent'
-              } flex items-center justify-center shadow-2xl transition-all duration-300 border-4 border-background`}>
-                <Wifi className="w-16 h-16 text-white" />
+              <div className={`w-28 h-28 md:w-32 md:h-32 rounded-full bg-card border-2 ${
+                hoveredZone ? 'border-primary scale-110 shadow-xl' : 'border-border'
+              } flex items-center justify-center shadow-lg transition-all duration-300`}>
+                <div className="text-center">
+                  <Wifi className={`w-10 h-10 md:w-12 md:h-12 mx-auto ${hoveredZone ? 'text-primary' : 'text-foreground'} transition-colors`} />
+                  <p className="text-xs font-semibold text-foreground mt-1">Router</p>
+                </div>
               </div>
-              <p className="text-center mt-3 font-bold text-foreground">GI NET Router</p>
-              <p className="text-center text-sm text-muted-foreground">VLAN Controller</p>
             </div>
 
-            {/* Connection Lines - Only show when hovering */}
-            {hoveredZone && (
-              <>
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 5 }}>
-                  {/* Personal Zone Line */}
-                  {hoveredZone === "personal" && (
-                    <line
-                      x1="50%"
-                      y1="50%"
-                      x2="25%"
-                      y2="20%"
-                      stroke="hsl(var(--primary))"
-                      strokeWidth="3"
-                      strokeDasharray="8,4"
-                      className="animate-pulse"
-                    />
-                  )}
-                  {/* IoT Zone Line */}
-                  {hoveredZone === "iot" && (
-                    <line
-                      x1="50%"
-                      y1="50%"
-                      x2="75%"
-                      y2="20%"
-                      stroke="hsl(var(--accent))"
-                      strokeWidth="3"
-                      strokeDasharray="8,4"
-                      className="animate-pulse"
-                    />
-                  )}
-                  {/* Guest Zone Line */}
-                  {hoveredZone === "guest" && (
-                    <line
-                      x1="50%"
-                      y1="50%"
-                      x2="50%"
-                      y2="88%"
-                      stroke="hsl(var(--secondary))"
-                      strokeWidth="3"
-                      strokeDasharray="8,4"
-                      className="animate-pulse"
-                    />
-                  )}
-                </svg>
-              </>
-            )}
+            {/* Connection Lines SVG */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 5 }}>
+              <defs>
+                <linearGradient id="lineGradientPrimary" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+                </linearGradient>
+              </defs>
+              {/* Lines to each zone */}
+              <line x1="50%" y1="50%" x2="25%" y2="15%" 
+                stroke={hoveredZone === "personal" ? "hsl(var(--primary))" : "hsl(var(--border))"} 
+                strokeWidth="2" strokeDasharray="6,4" 
+                className="transition-all duration-300" />
+              <line x1="50%" y1="50%" x2="75%" y2="15%" 
+                stroke={hoveredZone === "iot" ? "hsl(var(--warning))" : "hsl(var(--border))"} 
+                strokeWidth="2" strokeDasharray="6,4"
+                className="transition-all duration-300" />
+              <line x1="50%" y1="50%" x2="50%" y2="90%" 
+                stroke={hoveredZone === "guest" ? "hsl(var(--success))" : "hsl(var(--border))"} 
+                strokeWidth="2" strokeDasharray="6,4"
+                className="transition-all duration-300" />
+            </svg>
 
             {/* Personal Zone - Top Left */}
             <div
-              className="absolute top-4 left-4 lg:left-8 w-72 lg:w-80"
+              className="absolute top-0 left-0 w-64 md:w-72"
               onMouseEnter={() => setHoveredZone("personal")}
               onMouseLeave={() => setHoveredZone(null)}
             >
-              <div className={`bg-card rounded-3xl p-6 border-2 ${zones.personal.borderColor} shadow-xl transition-all duration-300 cursor-pointer ${
-                hoveredZone === "personal" ? 'scale-105 shadow-2xl ring-4 ring-primary/20' : 'hover:scale-102'
+              <div className={`bg-card rounded-2xl p-5 border-2 transition-all duration-300 cursor-pointer ${
+                hoveredZone === "personal" 
+                  ? 'border-primary shadow-lg scale-105' 
+                  : 'border-border hover:border-primary/50 hover:shadow-md'
               }`}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${zones.personal.color} flex items-center justify-center`}>
-                    <Shield className="w-6 h-6 text-white" />
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${zones.personal.color} flex items-center justify-center`}>
+                    <Shield className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-foreground">1️⃣ Personal</h3>
+                    <h3 className="font-semibold text-foreground text-sm">Personal</h3>
                     <p className="text-xs text-muted-foreground">Secure Zone</p>
                   </div>
                 </div>
                 
-                <div className="space-y-2 mb-4">
+                <div className="space-y-2 mb-3">
                   {zones.personal.devices.map((device, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-sm">
-                      <device.icon className="w-4 h-4 text-primary" />
-                      <span className="text-foreground">{device.name}</span>
+                    <div key={idx} className="flex items-center gap-2 text-xs">
+                      <device.icon className="w-3.5 h-3.5 text-primary" />
+                      <span className="text-muted-foreground">{device.name}</span>
                     </div>
                   ))}
                 </div>
 
                 {hoveredZone === "personal" && (
-                  <div className="mt-4 p-3 bg-primary/10 rounded-lg border border-primary/20 animate-fade-in">
+                  <div className="mt-3 p-3 bg-primary/5 rounded-lg border border-primary/20 animate-fade-in">
                     <p className="text-xs text-foreground leading-relaxed">
-                      <Lock className="w-4 h-4 inline mr-1 text-primary" />
+                      <Lock className="w-3 h-3 inline mr-1 text-primary" />
                       {zones.personal.benefit}
                     </p>
                   </div>
@@ -170,36 +142,38 @@ const InteractiveVLANDiagram = () => {
 
             {/* IoT Zone - Top Right */}
             <div
-              className="absolute top-4 right-4 lg:right-8 w-72 lg:w-80"
+              className="absolute top-0 right-0 w-64 md:w-72"
               onMouseEnter={() => setHoveredZone("iot")}
               onMouseLeave={() => setHoveredZone(null)}
             >
-              <div className={`bg-card rounded-3xl p-6 border-2 ${zones.iot.borderColor} shadow-xl transition-all duration-300 cursor-pointer ${
-                hoveredZone === "iot" ? 'scale-105 shadow-2xl ring-4 ring-accent/20' : 'hover:scale-102'
+              <div className={`bg-card rounded-2xl p-5 border-2 transition-all duration-300 cursor-pointer ${
+                hoveredZone === "iot" 
+                  ? 'border-warning shadow-lg scale-105' 
+                  : 'border-border hover:border-warning/50 hover:shadow-md'
               }`}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${zones.iot.color} flex items-center justify-center`}>
-                    <Camera className="w-6 h-6 text-white" />
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${zones.iot.color} flex items-center justify-center`}>
+                    <Camera className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-foreground">2️⃣ IoT + CCTV</h3>
+                    <h3 className="font-semibold text-foreground text-sm">IoT + CCTV</h3>
                     <p className="text-xs text-muted-foreground">Isolated Zone</p>
                   </div>
                 </div>
                 
-                <div className="space-y-2 mb-4">
+                <div className="space-y-2 mb-3">
                   {zones.iot.devices.map((device, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-sm">
-                      <device.icon className="w-4 h-4 text-accent" />
-                      <span className="text-foreground">{device.name}</span>
+                    <div key={idx} className="flex items-center gap-2 text-xs">
+                      <device.icon className="w-3.5 h-3.5 text-warning" />
+                      <span className="text-muted-foreground">{device.name}</span>
                     </div>
                   ))}
                 </div>
 
                 {hoveredZone === "iot" && (
-                  <div className="mt-4 p-3 bg-accent/10 rounded-lg border border-accent/20 animate-fade-in">
+                  <div className="mt-3 p-3 bg-warning/5 rounded-lg border border-warning/20 animate-fade-in">
                     <p className="text-xs text-foreground leading-relaxed">
-                      <AlertTriangle className="w-4 h-4 inline mr-1 text-accent" />
+                      <AlertTriangle className="w-3 h-3 inline mr-1 text-warning" />
                       {zones.iot.benefit}
                     </p>
                   </div>
@@ -209,36 +183,38 @@ const InteractiveVLANDiagram = () => {
 
             {/* Guest Zone - Bottom Center */}
             <div
-              className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-72 lg:w-80"
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 md:w-72"
               onMouseEnter={() => setHoveredZone("guest")}
               onMouseLeave={() => setHoveredZone(null)}
             >
-              <div className={`bg-card rounded-3xl p-6 border-2 ${zones.guest.borderColor} shadow-xl transition-all duration-300 cursor-pointer ${
-                hoveredZone === "guest" ? 'scale-105 shadow-2xl ring-4 ring-secondary/20' : 'hover:scale-102'
+              <div className={`bg-card rounded-2xl p-5 border-2 transition-all duration-300 cursor-pointer ${
+                hoveredZone === "guest" 
+                  ? 'border-success shadow-lg scale-105' 
+                  : 'border-border hover:border-success/50 hover:shadow-md'
               }`}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${zones.guest.color} flex items-center justify-center`}>
-                    <Users className="w-6 h-6 text-white" />
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${zones.guest.color} flex items-center justify-center`}>
+                    <Users className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-foreground">3️⃣ Guest WiFi</h3>
+                    <h3 className="font-semibold text-foreground text-sm">Guest WiFi</h3>
                     <p className="text-xs text-muted-foreground">Visitor Zone</p>
                   </div>
                 </div>
                 
-                <div className="space-y-2 mb-4">
+                <div className="space-y-2 mb-3">
                   {zones.guest.devices.map((device, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-sm">
-                      <device.icon className="w-4 h-4 text-secondary" />
-                      <span className="text-foreground">{device.name}</span>
+                    <div key={idx} className="flex items-center gap-2 text-xs">
+                      <device.icon className="w-3.5 h-3.5 text-success" />
+                      <span className="text-muted-foreground">{device.name}</span>
                     </div>
                   ))}
                 </div>
 
                 {hoveredZone === "guest" && (
-                  <div className="mt-4 p-3 bg-secondary/10 rounded-lg border border-secondary/20 animate-fade-in">
+                  <div className="mt-3 p-3 bg-success/5 rounded-lg border border-success/20 animate-fade-in">
                     <p className="text-xs text-foreground leading-relaxed">
-                      <Lock className="w-4 h-4 inline mr-1 text-secondary" />
+                      <Lock className="w-3 h-3 inline mr-1 text-success" />
                       {zones.guest.benefit}
                     </p>
                   </div>
@@ -249,15 +225,15 @@ const InteractiveVLANDiagram = () => {
         </div>
 
         {/* Info Box */}
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-card border-2 border-primary/20 rounded-2xl p-8 text-center">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Shield className="w-6 h-6 text-primary" />
-              <h3 className="text-xl font-bold text-foreground">
-                {hoveredZone ? "🔒 Active Protection" : "Hover over each zone to see protection details"}
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-background border border-border rounded-2xl p-6 text-center">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Shield className="w-5 h-5 text-primary" />
+              <h3 className="font-semibold text-foreground">
+                {hoveredZone ? "Active Protection" : "Hover to see protection details"}
               </h3>
             </div>
-            <p className="text-muted-foreground">
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto">
               {hoveredZone 
                 ? "Each VLAN creates a separate network segment with its own security rules and traffic isolation."
                 : "GI NET's VLAN technology creates physical network separation at the router level, providing enterprise-grade security for your home."
