@@ -7,11 +7,11 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Plan price IDs mapping
+// Plan price IDs mapping (TEST MODE)
 const PLAN_PRICES: Record<string, string> = {
-  Basic: "price_1SXgcaL2p33M6UKupHHPysmI",
-  Pro: "price_1SXgdPL2p33M6UKuVdpscdLZ",
-  Ultra: "price_1SXguCL2p33M6UKuXDtIlAml",
+  Basic: "price_1SZRDwL2p33M6UKuJsCg8wwa",
+  Pro: "price_1SZREAL2p33M6UKuIJEqwrqv",
+  Ultra: "price_1SZRENL2p33M6UKuOaMwwWK0",
 };
 
 serve(async (req) => {
