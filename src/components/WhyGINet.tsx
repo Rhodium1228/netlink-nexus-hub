@@ -1,5 +1,6 @@
-import { Shield, Headphones, Video, Router, FileCheck, Users, ArrowRight } from "lucide-react";
+import { Shield, Headphones, Video, Router, FileCheck, Users, ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const features = [
   {
@@ -35,6 +36,8 @@ const features = [
 ];
 
 const WhyGINet = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
     <section className="section-padding bg-card border-y border-border">
       <div className="content-container">
@@ -49,6 +52,72 @@ const WhyGINet = () => {
           <p className="body-lg max-w-2xl mx-auto">
             We deliver more than just internet — we deliver peace of mind with enterprise-grade features.
           </p>
+        </div>
+
+        {/* Video Showcase */}
+        <div className="mb-16 max-w-4xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 aspect-video group">
+            {!isPlaying ? (
+              <>
+                {/* Animated placeholder with network visualization */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {/* Animated network nodes */}
+                  <div className="absolute inset-0">
+                    {[...Array(6)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="absolute w-3 h-3 bg-primary/40 rounded-full animate-ping"
+                        style={{
+                          left: `${20 + (i * 12)}%`,
+                          top: `${30 + (i % 3) * 20}%`,
+                          animationDelay: `${i * 0.3}s`,
+                          animationDuration: '2s'
+                        }}
+                      />
+                    ))}
+                    {/* Connection lines */}
+                    <svg className="absolute inset-0 w-full h-full">
+                      <defs>
+                        <linearGradient id="networkLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+                          <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.5" />
+                          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                      <line x1="20%" y1="40%" x2="80%" y2="60%" stroke="url(#networkLine)" strokeWidth="2" className="animate-pulse" />
+                      <line x1="30%" y1="30%" x2="70%" y2="70%" stroke="url(#networkLine)" strokeWidth="2" className="animate-pulse delay-200" />
+                      <line x1="40%" y1="50%" x2="60%" y2="50%" stroke="url(#networkLine)" strokeWidth="2" className="animate-pulse delay-400" />
+                    </svg>
+                  </div>
+                  
+                  {/* Central text */}
+                  <div className="text-center z-10">
+                    <p className="text-xl font-semibold text-foreground mb-2">See GI NET in Action</p>
+                    <p className="text-muted-foreground text-sm">Enterprise-grade network security for your home</p>
+                  </div>
+                </div>
+
+                {/* Play button */}
+                <button
+                  onClick={() => setIsPlaying(true)}
+                  className="absolute inset-0 flex items-center justify-center z-20 group-hover:bg-foreground/5 transition-colors"
+                  aria-label="Play video"
+                >
+                  <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
+                  </div>
+                </button>
+              </>
+            ) : (
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                title="GI NET Network Security"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            )}
+          </div>
         </div>
 
         {/* Features Grid */}

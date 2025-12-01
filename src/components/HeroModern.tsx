@@ -1,25 +1,34 @@
 import { Button } from "@/components/ui/button";
 import { Wifi, Zap, Shield, ArrowRight, ChevronDown } from "lucide-react";
 import enterpriseModem from "@/assets/enterprise-modem.jpg";
+import heroVideo from "@/assets/plan-background-animated.mp4";
 
 const HeroModern = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-      {/* Subtle animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Gradient orbs */}
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-soft" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse-soft delay-200" />
-        
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{
-          backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
-                           linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px'
-        }} />
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+      </div>
 
-        {/* Animated lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
+      {/* Animated overlay elements */}
+      <div className="absolute inset-0 overflow-hidden z-1">
+        {/* Gradient orbs */}
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-soft delay-200" />
+        
+        {/* Animated network lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
@@ -27,8 +36,9 @@ const HeroModern = () => {
               <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
             </linearGradient>
           </defs>
-          <line x1="0" y1="30%" x2="100%" y2="30%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-draw-line" />
-          <line x1="0" y1="70%" x2="100%" y2="70%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-draw-line delay-300" />
+          <line x1="0" y1="25%" x2="100%" y2="25%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-draw-line" />
+          <line x1="0" y1="50%" x2="100%" y2="50%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-draw-line delay-200" />
+          <line x1="0" y1="75%" x2="100%" y2="75%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-draw-line delay-400" />
         </svg>
       </div>
 
