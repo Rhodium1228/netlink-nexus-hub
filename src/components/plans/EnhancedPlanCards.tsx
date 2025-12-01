@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Star, Wifi, Shield, Filter, Zap, Gift, ArrowRight } from "lucide-react";
+import { Check, Star, Wifi, Shield, Filter, Zap, Gift, ArrowRight, ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import planProDetail from "@/assets/plan-pro-detail.png";
 
 const plans = [
   {
@@ -29,6 +31,7 @@ const plans = [
     icon: Shield,
     color: "from-primary to-secondary",
     popular: true,
+    detailImage: planProDetail,
     features: [
       "Unlimited data",
       "4K streaming ready",
@@ -216,6 +219,29 @@ const EnhancedPlanCards = () => {
                     </li>
                   ))}
                 </ul>
+
+                {/* Detail Image Button */}
+                {'detailImage' in plan && plan.detailImage && (
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="w-full mb-4 text-primary hover:text-primary/80 hover:bg-primary/10"
+                      >
+                        <ImageIcon className="w-4 h-4 mr-2" />
+                        View Plan Details
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl p-2 bg-background/95 backdrop-blur-sm">
+                      <img 
+                        src={plan.detailImage} 
+                        alt={`${plan.name} plan details`}
+                        className="w-full h-auto rounded-lg"
+                      />
+                    </DialogContent>
+                  </Dialog>
+                )}
 
                 {/* CTA Button */}
                 <Button 
