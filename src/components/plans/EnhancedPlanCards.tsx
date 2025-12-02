@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Star, Wifi, Shield, Filter, Zap, Gift, ArrowRight, ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { ShoppingCartComponent } from "./ShoppingCart";
 
 const plans = [
   {
@@ -118,7 +119,8 @@ const EnhancedPlanCards = () => {
   }, [currentIndex, currentPlan.video]);
 
   return (
-    <section className="py-24 bg-background" id="plans-comparison">
+    <section className="py-24 bg-background relative" id="plans-comparison">
+      <ShoppingCartComponent />
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
